@@ -1,11 +1,11 @@
 from flask import Flask, send_from_directory, Response, jsonify
 import os
 import mimetypes
-from flask_cors import CORS
+# from flask_cors import CORS
 import sqlite3
 ROOT = os.path.dirname(os.path.realpath(__file__))
 app = Flask(__name__, static_folder="dist", static_url_path="")
-CORS(app)
+# CORS(app)
 # Make sure .js files are served as application/javascript
 mimetypes.add_type("application/javascript", ".js")
 
