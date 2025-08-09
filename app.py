@@ -25,6 +25,7 @@ def country(country):
 @app.route("/api/<country>")
 def static_proxy(country):
     connection = sqlite3.connect(os.path.join(ROOT, "anthems.db"))
+    anthem_data = {}
     cursor = connection.cursor()
     for data in cursor.execute("SELECT * FROM anthems WHERE state = ?", (country,)):
         anthem_data = {
@@ -50,11 +51,11 @@ def get_countries():
     rows = cursor.fetchall()
 
     # Flatten list of tuples into a list of strings
-    anthem_data = [[row[0], row[1]] for row in rows]
-    anthem_data.append("All Countries")  # Add "All Countries" option
+    all_anthem_data = [[row[0], row[1]] for row in rows]
+    all_anthem_data.append("All Countries")  # Add "All Countries" option
 
     connection.close()
-    return jsonify(anthem_data)
+    return jsonify(all_anthem_data)
 
 
 
