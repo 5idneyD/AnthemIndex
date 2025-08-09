@@ -40,12 +40,15 @@
       </section>
 
       <!-- RIGHT COLUMN: Placeholder -->
-      <!-- <aside class="sidebar">
-        <h2>Extra Info</h2>
-        <p class="placeholder-text">
-          This panel can show composer info, anthem history, or related links.
-        </p>
-      </aside> -->
+      <aside class="sidebar">
+        <h2>Select Another Country</h2>
+    <select id="country" v-model="selectedCountry" @change="selectCountry">
+      <option value="">Select...</option>
+      <option v-for="country in countries" :key="country" :value="country" >
+        {{ country[0] }}
+      </option>
+    </select>
+      </aside>
     </main>
   </div>
 </template>
@@ -61,6 +64,8 @@ const lyricist = ref('...')
 const composer = ref('...')
 const year = ref('...')
 const title = ref('...')
+const countries = ref([])
+const selectedCountry = ref('')
 
 onMounted(async () => {
   const res = await fetch('/api/' + window.location.pathname.split('/')[1])
@@ -74,6 +79,15 @@ onMounted(async () => {
   year.value = data.year
   title.value = data.anthem_name
 })
+
+onMounted(async () => {
+  const res = await fetch('/api/countries')
+  countries.value = await res.json()
+})
+
+function selectCountry(){
+  window.location.href = `/${selectedCountry.value[0]}`
+}
 </script>
 
 <style scoped>
