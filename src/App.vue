@@ -1,6 +1,6 @@
 <template>
-	<v-card class="bg-teal-darken-4 d-flex align-center justify-space-between">
-		<v-card-title>Anthem Index 🌍</v-card-title>
+	<v-card class="bg-indigo-darken-3 d-flex align-center justify-space-between">
+		<v-card-title class="text-white">Anthem Index 🌍</v-card-title>
 		<v-autocomplete
 			v-model="selectedCountry"
 			:items="countries"
@@ -14,7 +14,7 @@
 			style="max-width: 200px" />
 	</v-card>
 
-	<v-card class="bg-blue-lighten-5 border-md">
+	<v-card class="bg-grey-lighten-5" border="info lg">
 		<v-row justify="center" align="end" class="py-6">
 			<v-col cols="5" sm="6" class="text-center">
 				<v-card-title class="text-wrap">{{ message }}</v-card-title>
@@ -30,13 +30,13 @@
 		</v-row>
 	</v-card>
 
-	<v-card class="bg-blue-lighten-5 px-4">
+	<v-card class="bg-grey-lighten-5 px-4 py-6">
 		<div id="lyrics" class="text-pre-wrap">
 			<p>{{ lyrics }}</p>
 		</div>
 	</v-card>
 
-	<v-card class="bg-blue-lighten-5 border-md">
+	<v-card class="bg-grey-lighten-5" border="info lg">
 		<v-card-title>Title</v-card-title>
 		<v-card-text>The title of the song is {{ title }}.</v-card-text>
 		<v-card-title>Composition</v-card-title>
@@ -59,7 +59,6 @@
 	const title = ref("...");
 	const countries = ref([]);
 	const selectedCountry = ref("");
-	const country = ref("");
 
 	onMounted(async () => {
 		const res = await fetch("/api/" + window.location.pathname.split("/")[1]);

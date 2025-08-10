@@ -10,6 +10,7 @@ app = Flask(__name__, static_folder="dist", static_url_path="")
 mimetypes.add_type("application/javascript", ".js")
 
 @app.route("/")
+@app.route("/null")
 def index():
     return send_from_directory(app.static_folder, "index.html")
 
@@ -19,7 +20,7 @@ def hello():
 
 @app.route("/<country>")
 def country(country):
-    return send_from_directory(app.static_folder, "index.html")
+    return send_from_directory(app.static_folder, "country.html")
 
 # Catch-all route for Vue's client-side routing
 @app.route("/api/<country>")
@@ -39,6 +40,7 @@ def static_proxy(country):
             "lyrics": data[8]
         }
     connection.close()
+    
     return jsonify(anthem_data)
 
 @app.route("/api/countries")
