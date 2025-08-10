@@ -34,7 +34,7 @@
 				<v-card-title class="text-wrap">Welcome to Anthem Index!</v-card-title>
 			</v-col>
 			<v-col cols="4" sm="6">
-				<img src="/earth-globe.png" alt="Earth Globe" class="flag-img mt-auto mb-auto w-75 h-75" />
+				<v-img src="https://cdn.pixabay.com/photo/2016/02/04/13/40/the-earth-1179205_1280.png" alt="Earth Globe" class="flag-img  w-75 h-75" ></v-img>
 			</v-col>
 		</v-row>
 	</v-card>
@@ -103,7 +103,7 @@
 		const data = await res.json();
 		message.value = data.country ? data.country : none;
 		sourceURL.value = data.source;
-		flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : "earth-globe.png";
+		flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : none;
 		lyrics.value = data.lyrics;
 		lyricist.value = data.lyricist;
 		composer.value = data.composer;

@@ -20,7 +20,7 @@ def country(country):
 
 # Catch-all route for Vue's client-side routing
 @app.route("/api/<country>")
-def static_proxy(country):
+def fetch_country(country):
     connection = sqlite3.connect(os.path.join(ROOT, "anthems.db"))
     anthem_data = {}
     cursor = connection.cursor()
@@ -56,7 +56,14 @@ def get_countries():
     return jsonify(all_anthem_data)
 
 
-
+# Serve all other routes from Vue
+@app.route("/<path:path>")
+def static_proxy(path):
+    file_path = os.path.join(app.static_folder, path)
+    if os.path.isfile(file_path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, "index.html")
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=5000)
