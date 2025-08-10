@@ -13,9 +13,6 @@ mimetypes.add_type("application/javascript", ".js")
 def index():
     return send_from_directory(app.static_folder, "index.html")
 
-@app.route("/api/hello")
-def hello():
-    return jsonify(message="Hello from Flask!")
 
 @app.route("/<country>")
 def country(country):
