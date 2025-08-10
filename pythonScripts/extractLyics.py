@@ -3,10 +3,10 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-connection = sqlite3.connect("anthems.db")
+connection = sqlite3.connect("./anthems.db")
 countries = pd.read_sql_query("SELECT state FROM anthems", connection)
 cursor = connection.cursor()
-cursor.execute("ALTER TABLE anthems ADD COLUMN lyrics TEXT")  # Add a new column for lyrics if it doesn't exist
+# cursor.execute("ALTER TABLE anthems ADD COLUMN lyrics TEXT")  # Add a new column for lyrics if it doesn't exist
 df = pd.DataFrame(columns=["country", "lyrics"])
 
 for i in countries['State']:
