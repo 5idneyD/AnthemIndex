@@ -13,6 +13,6 @@ function playPause(){
 </script>
 
 <template>
-  <v-btn class="bg-indigo-lighten-4" id="mediaControl" @click="playPause">▶</v-btn>
+  <v-btn class="bg-grey-darken-4" id="mediaControl" @click="playPause">▶</v-btn>
 </template>
 

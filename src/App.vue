@@ -1,5 +1,5 @@
 <template>
-	<v-card class="bg-indigo-darken-3 d-flex align-center justify-space-between">
+	<v-card class="bg-grey-darken-4 d-flex align-center justify-space-between">
 		<v-card-title class="text-white">Anthem Index 🌍</v-card-title>
 		<v-autocomplete
 			v-model="selectedCountry"
@@ -14,7 +14,7 @@
 			style="max-width: 200px" />
 	</v-card>
 
-	<v-card class="bg-grey-lighten-5" border="info lg">
+	<v-card class="bg-grey-lighten-5" border="lg">
 		<v-row justify="center" align="end" class="py-6">
 			<v-col cols="5" sm="6" class="text-center">
 				<v-card-title class="text-wrap">{{ message }}</v-card-title>
@@ -36,7 +36,7 @@
 		</div>
 	</v-card>
 
-	<v-card class="bg-grey-lighten-5" border="info lg">
+	<v-card class="bg-grey-lighten-5" border="lg">
 		<v-card-title>Title</v-card-title>
 		<v-card-text>The title of the song is {{ title }}.</v-card-text>
 		<v-card-title>Composition</v-card-title>
@@ -44,6 +44,14 @@
 		<v-card-title>Date</v-card-title>
 		<v-card-text>Research suggests the song originated in {{ year }}</v-card-text>
 	</v-card>
+
+	<v-footer class="bg-grey-darken-4 text-white">
+		<v-row justify="center">
+			<v-col cols="12" sm="6" class="text-center">
+				<p>Sponsored by <a href="https://www.novariance.com" class="text-grey">No Variance.com</a></p>
+			</v-col>
+		</v-row>
+	</v-footer>	
 </template>
 
 <script setup>
@@ -85,6 +93,10 @@
 </script>
 
 <style scoped>
+
+* {
+	    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
 	/* Flag */
 	.flag-img {
 		max-width: 200px;
