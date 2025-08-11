@@ -57,6 +57,8 @@
 		<v-card-text>The song was written by {{ lyricist }} and composed by {{ composer }}</v-card-text>
 		<v-card-title>Date</v-card-title>
 		<v-card-text>Research suggests the song originated in {{ year }}</v-card-text>
+		<v-card-title>Info</v-card-title>
+		<v-card-text class="text-pre-wrap">{{ short_fact }}</v-card-text>
 	</v-card>
 
 	<v-card v-else class="bg-grey-lighten-5 py-8" border="lg">
@@ -92,6 +94,7 @@
 	const lyricist = ref("");
 	const composer = ref("");
 	const year = ref("");
+	const short_fact = ref("");
 	const title = ref("");
 	const countries = ref([]);
 	const selectedCountry = ref("");
@@ -109,6 +112,7 @@
 		composer.value = data.composer;
 		year.value = data.year;
 		title.value = data.anthem_name ? data.anthem_name : none;
+		short_fact.value = data.short_fact.replace(". ", ". \n\n").replace(/\[.*?\]/g, "").replace(".", ".\n\n");
 	});
 
 	onMounted(async () => {

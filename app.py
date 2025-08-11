@@ -33,7 +33,8 @@ def fetch_country(country):
             "year": data[3],
             "source": data[6],
             "flag_link": data[7],
-            "lyrics": data[8]
+            "lyrics": data[8],
+            "short_fact": data[-1]
         }
     connection.close()
     
