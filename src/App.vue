@@ -104,7 +104,7 @@
 		message.value = data.country ? data.country : none;
 		sourceURL.value = data.source;
 		flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : none;
-		lyrics.value = data.lyrics;
+		lyrics.value = data.lyrics.replace(/\n\n\n/g, "\n\n--------------------\n\n");
 		lyricist.value = data.lyricist;
 		composer.value = data.composer;
 		year.value = data.year;
