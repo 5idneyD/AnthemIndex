@@ -1,6 +1,6 @@
 <template>
 	<v-card class="bg-grey-darken-4 d-flex align-center justify-space-between">
-		<a href="/"><v-card-title class="text-white">Anthem Index 🌍</v-card-title></a>
+		<v-card-title class="text-white"><a href="/">Anthem Index 🌍</a></v-card-title>
 		<v-autocomplete
 			v-model="selectedCountry"
 			:items="countries"
@@ -11,7 +11,7 @@
 			outlined
 			dense
 			hide-details
-			style="max-width: 200px" />
+			style="max-width: 400px" />
 	</v-card>
 
 	<v-card class="bg-grey-lighten-5" border="lg">
@@ -112,7 +112,7 @@
 		composer.value = data.composer;
 		year.value = data.year;
 		title.value = data.anthem_name ? data.anthem_name : none;
-		short_fact.value = data.short_fact.replace(". ", ". \n\n").replace(/\[.*?\]/g, "").replace(".", ".\n\n");
+		short_fact.value = data.short_fact.replace(". ", ". \n\n").replace(/\[.*?\]/g, "").replace(".\n", ".\n\n");
 	});
 
 	onMounted(async () => {
