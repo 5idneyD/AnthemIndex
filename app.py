@@ -36,6 +36,8 @@ def fetch_country(country):
             "lyrics": data[8],
             "short_fact": data[-1]
         }
+    cursor.execute("UPDATE analysis SET visit_count = visit_count + 1 WHERE country = ?", (country,))
+    connection.commit()
     connection.close()
     
     return jsonify(anthem_data)

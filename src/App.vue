@@ -1,6 +1,6 @@
 <template>
 	<v-card class="bg-grey-darken-4 d-flex align-center justify-space-between">
-		<v-card-title class="text-white"><a href="/">Anthem Index 🌍</a></v-card-title>
+		<v-card-title><a href="/" class="text-white">Anthem Index 🌍</a></v-card-title>
 		<v-autocomplete
 			v-model="selectedCountry"
 			:items="countries"
@@ -187,5 +187,9 @@
 
 	.notes-card {
 		height: fit-content;
+	}
+
+	a[href="/"] {
+		text-decoration-color: blueviolet;
 	}
 </style>
