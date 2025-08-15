@@ -58,6 +58,9 @@ def get_countries():
     connection.close()
     return jsonify(all_anthem_data)
 
+@app.route("/api/")
+def api_index():
+    return jsonify({"message": "Welcome to the Anthem Index API!"})
 
 # Serve all other routes from Vue
 @app.route("/<path:path>")

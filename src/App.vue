@@ -38,27 +38,31 @@
 			</v-col>
 		</v-row>
 		<v-row v-else justify="center" align="center" class="py-14">
-			<v-col cols="8" sm="6" class="text-center py-8">
+			<v-col v-if="!fetchedData" cols="6" lg="7" class="text-center py-8">
 				<v-card-title class="text-wrap">Welcome to Anthem Index!</v-card-title>
 			</v-col>
-			<v-col cols="4" sm="6">
+			<div v-else class="loading">
+				<div class="spinner"></div>
+			</div>
+			<v-col cols="0" lg="1" class="hidden-md-and-down"></v-col>
+			<v-col cols="6" lg="4">
 				<v-img
 					src="https://cdn.pixabay.com/photo/2016/02/04/13/40/the-earth-1179205_1280.png"
 					alt="Earth Globe"
-					class="flag-img w-75 h-75"></v-img>
+					class="flag-img w-50 h-50"></v-img>
 			</v-col>
 		</v-row>
 	</v-card>
 
 	<!-- Lyrics and info or random suggestion -->
-	<v-row align="stretch"  no-gutters>
+	<v-row align="stretch" no-gutters>
 		<v-col cols="12" lg="6">
-			<v-card v-if="lyrics" class="bg-grey-lighten-5 px-4 py-6"  border="lg">
+			<v-card v-if="lyrics" class="bg-grey-lighten-5 px-4 py-6 h-100" border="lg">
 				<div id="lyrics" class="text-pre-wrap">
 					<p>{{ lyrics }}</p>
 				</div>
 			</v-card>
-			<v-card v-else class="bg-grey-lighten-5 py-14  h-100" border="lg">
+			<v-card v-else-if="!fetchedData" class="bg-grey-lighten-5 py-14 h-100" border="lg">
 				<v-card-title>Explore Our Rich Collection of Songs</v-card-title>
 				<v-card-text
 					>Learn the lyrics and listen to the tunes of national anthems from all over the world!</v-card-text
@@ -68,9 +72,12 @@
 					below!</v-card-text
 				>
 			</v-card>
+			<div v-else class="loading">
+				<div class="spinner"></div>
+			</div>
 		</v-col>
 		<v-col cols="12" lg="6">
-			<v-card v-if="title" class="bg-grey-lighten-5 px-4 py-6 h-100"  border="lg">
+			<v-card v-if="title" class="bg-grey-lighten-5 px-4 py-6 h-100" border="lg">
 				<v-card-title>Title</v-card-title>
 				<v-card-text>The title of the song is {{ title }}.</v-card-text>
 				<v-card-title>Composition</v-card-title>
@@ -83,7 +90,7 @@
 
 			<v-card v-else class="bg-grey-lighten-5 py-14 h-100" border="lg">
 				<v-card-title>Why don't you try this one:</v-card-title>
-				<v-card-text class="text-grey py-8  px-16">
+				<v-card-text class="text-grey py-8 px-16">
 					<a :href="`/${randomCountry}`" class="text-decoration-none text-primary">
 						<v-row>
 							<v-col cols="2">
@@ -122,22 +129,28 @@
 	const selectedCountry = ref("");
 	const randomCountry = ref("");
 	const randomCountryFlag = ref("");
+	const fetchedData = ref(false);
 
 	onMounted(async () => {
-		const res = await fetch("/api/" + window.location.pathname.split("/")[1]);
-		const data = await res.json();
-		message.value = data.country ? data.country : none;
-		sourceURL.value = data.source;
-		flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : none;
-		lyrics.value = data.lyrics.replace(/\n\n\n/g, "\n\n--------------------\n\n");
-		lyricist.value = data.lyricist;
-		composer.value = data.composer;
-		year.value = data.year;
-		title.value = data.anthem_name ? data.anthem_name : none;
-		short_fact.value = data.short_fact
-			.replace(". ", ". \n\n")
-			.replace(/\[.*?\]/g, "")
-			.replace(".\n", ".\n\n");
+		const fetchedCountry = window.location.pathname.split("/")[1];
+		if (fetchedCountry) {
+			fetchedData.value = true;
+			const res = await fetch("/api/" + fetchedCountry);
+			const data = await res.json();
+			message.value = data.country ? data.country : none;
+			sourceURL.value = data.source;
+			flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : none;
+			lyrics.value = data.lyrics.replace(/\n\n\n/g, "\n\n--------------------\n\n");
+			lyricist.value = data.lyricist;
+			composer.value = data.composer;
+			year.value = data.year;
+			title.value = data.anthem_name ? data.anthem_name : none;
+			short_fact.value = data.short_fact
+				.replace(". ", ". \n\n")
+				.replace(/\[.*?\]/g, "")
+				.replace(".\n", ".\n\n");
+		} else {
+		}
 	});
 
 	onMounted(async () => {
@@ -195,7 +208,6 @@
 		text-align: center;
 		margin-top: 1rem;
 	}
-
 
 	video {
 		display: none;
