@@ -6,9 +6,24 @@ import '@mdi/font/css/materialdesignicons.css'
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
+import { VApp, VAppBar, VMain, VCard, VCardTitle, VAutocomplete, VImg, VCardText, VFooter, VBtn, VIcon, VRow, VCol, VSelect } from 'vuetify/components'
 const vuetify = createVuetify({
-  components
+  components: {
+    VApp,
+    VAppBar,
+    VMain,
+    VCard,
+    VBtn,
+    VIcon,
+    VRow,
+    VCol,
+    VSelect,
+    VCardTitle,
+    VAutocomplete,
+    VImg,
+    VCardText,
+    VFooter
+  }
 })
 
 createApp(App).use(vuetify).mount('#app')
