@@ -1,19 +1,27 @@
 <template>
-	<v-card class="bg-grey-darken-4 d-flex align-center justify-space-between">
-		<v-card-title><a href="/" class="text-white">Anthem Index 🌍</a></v-card-title>
-		<v-autocomplete
-			v-model="selectedCountry"
-			:items="countries"
-			item-title="name"
-			item-value="name"
-			label="Select a country"
-			@update:modelValue="selectCountry"
-			outlined
-			dense
-			hide-details
-			style="max-width: 400px" />
-	</v-card>
+	<!-- Header of the page -->
+	<v-row class="bg-grey-darken-4 align-center text-center" no-gutters>
+		<v-col cols="6" lg="5">
+			<v-card-title>
+				<a href="/" class="text-white">Anthem Index 🌍</a>
+			</v-card-title>
+		</v-col>
+		<v-col cols="0" lg="3" class="hidden-md-and-down"></v-col>
+		<v-col cols="6" lg="4">
+			<v-autocomplete
+				v-model="selectedCountry"
+				:items="countries"
+				item-title="name"
+				item-value="name"
+				label="Select a country"
+				@update:modelValue="selectCountry"
+				outlined
+				dense
+				hide-details />
+		</v-col>
+	</v-row>
 
+	<!-- Welcome message or country name, flag and media button -->
 	<v-card class="bg-grey-lighten-5" border="lg">
 		<v-row v-if="message" justify="center" align="end" class="py-6">
 			<v-col cols="5" sm="6" class="text-center">
@@ -29,53 +37,67 @@
 				</div>
 			</v-col>
 		</v-row>
-		<v-row v-else justify="center" align="end" class="py-6">
+		<v-row v-else justify="center" align="center" class="py-14">
 			<v-col cols="8" sm="6" class="text-center py-8">
 				<v-card-title class="text-wrap">Welcome to Anthem Index!</v-card-title>
 			</v-col>
 			<v-col cols="4" sm="6">
-				<v-img src="https://cdn.pixabay.com/photo/2016/02/04/13/40/the-earth-1179205_1280.png" alt="Earth Globe" class="flag-img  w-75 h-75" ></v-img>
+				<v-img
+					src="https://cdn.pixabay.com/photo/2016/02/04/13/40/the-earth-1179205_1280.png"
+					alt="Earth Globe"
+					class="flag-img w-75 h-75"></v-img>
 			</v-col>
 		</v-row>
 	</v-card>
 
-	<v-card v-if="lyrics" class="bg-grey-lighten-5 px-4 py-6">
-		<div id="lyrics" class="text-pre-wrap">
-			<p>{{ lyrics }}</p>
-		</div>
-	</v-card>
-	<v-card v-else class="bg-grey-lighten-5 py-12" border="lg">
-		<v-card-title>Explore Our Rich Collection of Songs</v-card-title>
-		<v-card-text>Learn the lyrics and listen to the tunes of national anthems from all over the world!</v-card-text>
-		<v-card-text>Select any country from our dropdown menu at the top or try the random country suggested below!</v-card-text>
-	</v-card>
+	<!-- Lyrics and info or random suggestion -->
+	<v-row align="stretch"  no-gutters>
+		<v-col cols="12" lg="6">
+			<v-card v-if="lyrics" class="bg-grey-lighten-5 px-4 py-6"  border="lg">
+				<div id="lyrics" class="text-pre-wrap">
+					<p>{{ lyrics }}</p>
+				</div>
+			</v-card>
+			<v-card v-else class="bg-grey-lighten-5 py-14" border="lg">
+				<v-card-title>Explore Our Rich Collection of Songs</v-card-title>
+				<v-card-text
+					>Learn the lyrics and listen to the tunes of national anthems from all over the world!</v-card-text
+				>
+				<v-card-text
+					>Select any country from our dropdown menu at the top or try the random country suggested
+					below!</v-card-text
+				>
+			</v-card>
+		</v-col>
+		<v-col cols="12" lg="6">
+			<v-card v-if="title" class="bg-grey-lighten-5 px-4 py-6 h-100"  border="lg">
+				<v-card-title>Title</v-card-title>
+				<v-card-text>The title of the song is {{ title }}.</v-card-text>
+				<v-card-title>Composition</v-card-title>
+				<v-card-text>The song was written by {{ lyricist }} and composed by {{ composer }}</v-card-text>
+				<v-card-title>Date</v-card-title>
+				<v-card-text>Research suggests the song originated in {{ year }}</v-card-text>
+				<v-card-title>Info</v-card-title>
+				<v-card-text class="text-pre-wrap">{{ short_fact }}</v-card-text>
+			</v-card>
 
-	<v-card v-if="title" class="bg-grey-lighten-5" border="lg">
-		<v-card-title>Title</v-card-title>
-		<v-card-text>The title of the song is {{ title }}.</v-card-text>
-		<v-card-title>Composition</v-card-title>
-		<v-card-text>The song was written by {{ lyricist }} and composed by {{ composer }}</v-card-text>
-		<v-card-title>Date</v-card-title>
-		<v-card-text>Research suggests the song originated in {{ year }}</v-card-text>
-		<v-card-title>Info</v-card-title>
-		<v-card-text class="text-pre-wrap">{{ short_fact }}</v-card-text>
-	</v-card>
+			<v-card v-else class="bg-grey-lighten-5 py-14 h-100" border="lg">
+				<v-card-title>Why don't you try this one:</v-card-title>
+				<v-card-text class="text-grey py-8  px-16">
+					<a :href="`/${randomCountry}`" class="text-decoration-none text-primary">
+						<v-row>
+							<v-col cols="2">
+								<img :src="randomCountryFlag" alt="" />
+							</v-col>
+							<v-col cols="10" class="align-text text-black">{{ randomCountry }}</v-col>
+						</v-row>
+					</a>
+				</v-card-text>
+			</v-card>
+		</v-col>
+	</v-row>
 
-	<v-card v-else class="bg-grey-lighten-5 py-8" border="lg">
-		<v-card-title>Why don't you try this one:</v-card-title>
-		<v-card-text class="text-grey py-4">
-			<a :href="`/${randomCountry}`" class="text-decoration-none text-primary">
-				<v-row>
-					<v-col cols="2">
-						<img :src="randomCountryFlag" alt="">
-					</v-col>
-					<v-col cols="10" class="align-text text-black">{{ randomCountry }}</v-col>
-				</v-row>
-				
-			</a>
-		</v-card-text>
-	</v-card>
-	<v-footer class="bg-grey-darken-4 text-white py-4">
+	<v-footer class="bg-grey-darken-4 text-white py-10 fill-height">
 		<v-row justify="center">
 			<v-col cols="12" sm="6" class="text-center">
 				<p>Sponsored by <a href="https://www.novariance.com" class="text-grey">No Variance.com</a></p>
@@ -112,14 +134,17 @@
 		composer.value = data.composer;
 		year.value = data.year;
 		title.value = data.anthem_name ? data.anthem_name : none;
-		short_fact.value = data.short_fact.replace(". ", ". \n\n").replace(/\[.*?\]/g, "").replace(".\n", ".\n\n");
+		short_fact.value = data.short_fact
+			.replace(". ", ". \n\n")
+			.replace(/\[.*?\]/g, "")
+			.replace(".\n", ".\n\n");
 	});
 
 	onMounted(async () => {
 		const res = await fetch("/api/countries");
 		const data = await res.json();
 		countries.value = data.map((row) => row[0]);
-		let ind = [Math.floor(Math.random() * data.length)]
+		let ind = [Math.floor(Math.random() * data.length)];
 		randomCountry.value = data[ind][0];
 		randomCountryFlag.value = data[ind][1];
 	});
@@ -171,15 +196,6 @@
 		margin-top: 1rem;
 	}
 
-	/* Responsive for mobile */
-	@media (max-width: 900px) {
-		main {
-			flex-direction: column;
-		}
-		section {
-			order: -1;
-		}
-	}
 
 	video {
 		display: none;
