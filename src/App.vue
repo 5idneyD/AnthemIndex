@@ -27,7 +27,7 @@
 			<v-col cols="5" sm="6" class="text-center">
 				<v-card-title class="text-wrap">{{ message }}</v-card-title>
 				<video :src="sourceURL" @timeupdate="updateTime"></video>
-				<MediaButton v-if="sourceURL" class="w-50 ml-25" />
+				<MediaButton v-if="sourceURL" class="w-25 ml-25 px-14" />
 				<div v-else></div>
 			</v-col>
 			<v-col cols="7" sm="6" class="text-center">
@@ -58,7 +58,7 @@
 	<v-row align="stretch" no-gutters>
 		<v-col cols="12" lg="6">
 			<v-card v-if="lyrics" class="bg-grey-lighten-5 px-4 py-6 h-100" border="lg">
-				<div id="lyrics" class="text-pre-wrap">
+				<div id="lyrics" class="text-pre-wrap text-center mt-5">
 					<p>{{ lyrics }}</p>
 				</div>
 			</v-card>
@@ -205,8 +205,8 @@
 
 	/* Lyrics */
 	#lyrics {
-		text-align: center;
-		margin-top: 1rem;
+		/* text-align: center;
+		margin-top: 1rem; */
 	}
 
 	video {

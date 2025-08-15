@@ -1,18 +1,24 @@
-<script setup>
-function playPause(){
-  let video = document.querySelector('video');
-  let button = document.querySelector('#mediaControl');
-  if (video.paused) {
-    video.play();
-    button.textContent = 'II';
-  } else {
-    video.pause();
-    button.textContent = '▶';
-  }
-}
-</script>
-
 <template>
-  <v-btn class="bg-grey-darken-4" id="mediaControl" @click="playPause">▶</v-btn>
+	<v-btn class="bg-grey-darken-4" id="mediaControl" @click="togglePlay">
+		<v-icon color="white">
+			{{ isPlaying ? "mdi-pause" : "mdi-play" }}
+		</v-icon>
+	</v-btn>
 </template>
 
+<script setup>
+	import { ref } from "vue";
+
+	const isPlaying = ref(false);
+
+	function togglePlay() {
+		let video = document.querySelector("video");
+		if (video.paused) {
+			video.play();
+			isPlaying.value = true;
+		} else {
+			video.pause();
+			isPlaying.value = false;
+		}
+	}
+</script>

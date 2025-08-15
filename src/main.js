@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import '/earth-globe.png';
+import '@mdi/font/css/materialdesignicons.css'
 
 // Vuetify
 import 'vuetify/styles'
