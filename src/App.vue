@@ -58,8 +58,8 @@
 	<v-row align="stretch" no-gutters>
 		<v-col cols="12" lg="6">
 			<v-card v-if="lyrics" class="bg-grey-lighten-5 px-4 py-6 h-100" border="lg">
-				<div id="lyrics" class="text-pre-wrap text-center mt-5">
-					<p>{{ lyrics }}</p>
+				<div id="lyrics" class="text-pre-wrap text-center mt-5" v-html="lyrics">
+					
 				</div>
 			</v-card>
 			<v-card v-else-if="!fetchedData" class="bg-grey-lighten-5 py-14 h-100" border="lg">
@@ -140,7 +140,7 @@
 			message.value = data.country ? data.country : none;
 			sourceURL.value = data.source;
 			flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : none;
-			lyrics.value = data.lyrics.replace(/\n\n\n/g, "\n\n--------------------\n\n");
+			lyrics.value = data.lyrics.replace(/\n\n\n/g, '\n\n<hr style="border: 1px solid grey; margin: 1rem auto; width: 60%;">\n\n');
 			lyricist.value = data.lyricist;
 			composer.value = data.composer;
 			year.value = data.year;
