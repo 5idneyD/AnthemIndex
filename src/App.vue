@@ -203,18 +203,8 @@
 		}
 	}
 
-	/* Lyrics */
-	#lyrics {
-		/* text-align: center;
-		margin-top: 1rem; */
-	}
-
 	video {
 		display: none;
-	}
-
-	.notes-card {
-		height: fit-content;
 	}
 
 	a[href="/"] {
