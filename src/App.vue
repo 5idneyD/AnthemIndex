@@ -58,7 +58,7 @@
 					<p>{{ lyrics }}</p>
 				</div>
 			</v-card>
-			<v-card v-else class="bg-grey-lighten-5 py-14" border="lg">
+			<v-card v-else class="bg-grey-lighten-5 py-14  h-100" border="lg">
 				<v-card-title>Explore Our Rich Collection of Songs</v-card-title>
 				<v-card-text
 					>Learn the lyrics and listen to the tunes of national anthems from all over the world!</v-card-text
