@@ -152,7 +152,7 @@
 				.replace(/\[.*?\]/g, "")
 				.replace(".\n", ".\n\n");
 		} else {
-			pass;
+			
 		}
 	});
 
