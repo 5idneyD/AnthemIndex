@@ -1,0 +1,9 @@
+User-agent: *
+
+# Block API endpoints (not useful for indexing)
+Disallow: /api/
+
+# Allow everything else
+Allow: /
+
+Sitemap: https://www.anthemindex.com/sitemap.xml

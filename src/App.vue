@@ -31,7 +31,7 @@
 				<div v-else></div>
 			</v-col>
 			<v-col cols="7" sm="6" class="text-center">
-				<img v-if="flagLink" :src="flagLink" alt="flag" class="flag-img mt-auto mb-auto" />
+				<img v-if="flagLink" :src="flagLink" alt="flag" class="flag-img mt-auto mb-auto" width="130px" height="70px"/>
 				<div v-else class="loading">
 					<div class="spinner"></div>
 				</div>
@@ -56,27 +56,26 @@
 
 	<!-- Lyrics and info or random suggestion -->
 	<v-row align="stretch" no-gutters>
-		<v-col cols="12" lg="6">
-			<v-card v-if="lyrics" class="bg-grey-lighten-5 px-4 py-6 h-100" border="lg">
-				<div id="lyrics" class="text-pre-wrap text-center mt-5" v-html="lyrics">
-					
+		<v-col cols="12" md="6">
+			<v-card class="bg-grey-lighten-5 px-4 py-6 h-100 w-100" border="lg">
+				<div v-if="lyrics" id="lyrics" class="text-pre-wrap text-center mt-5" v-html="lyrics"></div>
+				<span v-else-if="!fetchedData" span>
+					<v-card-title>Explore Our Rich Collection of Songs</v-card-title>
+					<v-card-text
+						>Learn the lyrics and listen to the tunes of national anthems from all over the
+						world!</v-card-text
+					>
+					<v-card-text
+						>Select any country from our dropdown menu at the top or try the random country suggested
+						below!</v-card-text
+					>
+				</span>
+				<div v-else class="loading min-h-screen">
+					<div class="spinner"></div>
 				</div>
 			</v-card>
-			<v-card v-else-if="!fetchedData" class="bg-grey-lighten-5 py-14 h-100" border="lg">
-				<v-card-title>Explore Our Rich Collection of Songs</v-card-title>
-				<v-card-text
-					>Learn the lyrics and listen to the tunes of national anthems from all over the world!</v-card-text
-				>
-				<v-card-text
-					>Select any country from our dropdown menu at the top or try the random country suggested
-					below!</v-card-text
-				>
-			</v-card>
-			<div v-else class="loading">
-				<div class="spinner"></div>
-			</div>
 		</v-col>
-		<v-col cols="12" lg="6">
+		<v-col cols="12" md="6">
 			<v-card v-if="title" class="bg-grey-lighten-5 px-4 py-6 h-100" border="lg">
 				<v-card-title>Title</v-card-title>
 				<v-card-text>The title of the song is {{ title }}.</v-card-text>
@@ -140,7 +139,10 @@
 			message.value = data.country ? data.country : none;
 			sourceURL.value = data.source;
 			flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : none;
-			lyrics.value = data.lyrics.replace(/\n\n\n/g, '\n\n<hr style="border: 1px solid grey; margin: 1rem auto; width: 60%;">\n');
+			lyrics.value = data.lyrics.replace(
+				/\n\n\n/g,
+				'\n\n<hr style="border: 1px solid grey; margin: 1rem auto; width: 60%;">\n',
+			);
 			lyricist.value = data.lyricist;
 			composer.value = data.composer;
 			year.value = data.year;
@@ -150,7 +152,7 @@
 				.replace(/\[.*?\]/g, "")
 				.replace(".\n", ".\n\n");
 		} else {
-			pass
+			pass;
 		}
 	});
 
@@ -182,6 +184,7 @@
 	/* Loading state */
 	.loading {
 		display: flex;
+		flex: 1;
 		flex-direction: column;
 		align-items: center;
 		gap: 1rem;
