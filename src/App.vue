@@ -1,13 +1,13 @@
 <template>
 	<!-- Header of the page -->
-	<v-row class="bg-grey-darken-4 align-center text-center" no-gutters>
+	<v-row class="bg-light align-center text-center w-75 my-4 mx-auto rounded-xl">
 		<v-col cols="6" lg="5">
 			<v-card-title>
-				<a href="/" class="text-white">Anthem Index 🌍</a>
+				<a href="/" class="text-primary">Anthem Index 🌍</a>
 			</v-card-title>
 		</v-col>
-		<v-col cols="0" lg="3" class="hidden-md-and-down"></v-col>
-		<v-col cols="6" lg="4">
+		<v-col cols="0" lg="2" class="hidden-md-and-down"></v-col>
+		<v-col cols="6" lg="4" class="px-4 py-2">
 			<v-autocomplete
 				v-model="selectedCountry"
 				:items="countries"
@@ -17,99 +17,107 @@
 				@update:modelValue="selectCountry"
 				outlined
 				dense
-				hide-details />
+				hide-details
+				class="bg-primary rounded-xl" />
 		</v-col>
 	</v-row>
 
 	<!-- Welcome message or country name, flag and media button -->
-	<v-card class="bg-grey-lighten-5" border="lg">
-		<v-row v-if="message" justify="center" align="end" class="py-6">
-			<v-col cols="5" sm="6" class="text-center">
-				<v-card-title class="text-wrap">{{ message }}</v-card-title>
-				<video :src="sourceURL" @timeupdate="updateTime"></video>
-				<MediaButton v-if="sourceURL" class="w-25 ml-25 px-14" />
-				<div v-else></div>
-			</v-col>
-			<v-col cols="7" sm="6" class="text-center">
-				<img v-if="flagLink" :src="flagLink" alt="flag" class="flag-img mt-auto mb-auto" width="130px" height="70px"/>
-				<div v-else class="loading">
-					<div class="spinner"></div>
+	<div class="content w-75 mx-auto text-primary">
+		<v-row>
+			<v-col cols="4 mx-auto mt-8 bg-light rounded-xl" style="height: 65vh; overflow-y: auto">
+				<v-row v-if="message" justify="center" align="end" class="py-6">
+					<v-col cols="5" sm="6" class="text-center">
+						<v-card-title class="text-wrap">{{ message }}</v-card-title>
+						<video :src="sourceURL" @timeupdate="updateTime"></video>
+						<MediaButton v-if="sourceURL" class="w-25 ml-25 px-14" />
+						<div v-else></div>
+					</v-col>
+					<v-col cols="7" sm="6" class="text-center">
+						<img
+							v-if="flagLink"
+							:src="flagLink"
+							alt="flag"
+							class="flag-img mt-auto mb-auto"
+							width="130px"
+							height="70px" />
+						<div v-else class="loading">
+							<div class="spinner"></div>
+						</div>
+					</v-col>
+				</v-row>
+				<v-row v-else justify="center" align="center" class="py-14">
+					<v-col v-if="!fetchedData" cols="6" lg="7" class="text-center py-8">
+						<v-card-title class="text-wrap">Welcome to Anthem Index!</v-card-title>
+					</v-col>
+					<div v-else class="loading">
+						<div class="spinner"></div>
+					</div>
+					<v-col cols="0" lg="1" class="hidden-md-and-down"></v-col>
+					<v-col cols="6" lg="4">
+						<v-img
+							src="https://cdn.pixabay.com/photo/2016/02/04/13/40/the-earth-1179205_1280.png"
+							alt="Earth Globe"
+							class="flag-img w-50 h-50"></v-img>
+					</v-col>
+				</v-row>
+				<div class="py-6 px-6 bg-light w-100 text-primary">
+					<v-card-title>Title</v-card-title>
+					<v-card-text>The title of the song is {{ title }}.</v-card-text>
+					<v-card-title>Composition</v-card-title>
+					<v-card-text>The song was written by {{ lyricist }} and composed by {{ composer }}</v-card-text>
+					<v-card-title>Date</v-card-title>
+					<v-card-text>Research suggests the song originated in {{ year }}</v-card-text>
+					<v-card-title>Info</v-card-title>
+					<v-card-text class="text-pre-wrap">{{ short_fact }}</v-card-text>
 				</div>
 			</v-col>
-		</v-row>
-		<v-row v-else justify="center" align="center" class="py-14">
-			<v-col v-if="!fetchedData" cols="6" lg="7" class="text-center py-8">
-				<v-card-title class="text-wrap">Welcome to Anthem Index!</v-card-title>
-			</v-col>
-			<div v-else class="loading">
-				<div class="spinner"></div>
-			</div>
-			<v-col cols="0" lg="1" class="hidden-md-and-down"></v-col>
-			<v-col cols="6" lg="4">
-				<v-img
-					src="https://cdn.pixabay.com/photo/2016/02/04/13/40/the-earth-1179205_1280.png"
-					alt="Earth Globe"
-					class="flag-img w-50 h-50"></v-img>
-			</v-col>
-		</v-row>
-	</v-card>
-
-	<!-- Lyrics and info or random suggestion -->
-	<v-row align="stretch" no-gutters>
-		<v-col cols="12" md="6">
-			<v-card class="bg-grey-lighten-5 px-4 py-6 h-100 w-100" border="lg">
-				<div v-if="lyrics" id="lyrics" class="text-pre-wrap text-center mt-5" v-html="lyrics"></div>
-				<span v-else-if="!fetchedData" span>
-					<v-card-title>Explore Our Rich Collection of Songs</v-card-title>
-					<v-card-text
-						>Learn the lyrics and listen to the tunes of national anthems from all over the
-						world!</v-card-text
-					>
-					<v-card-text
-						>Select any country from our dropdown menu at the top or try the random country suggested
-						below!</v-card-text
-					>
-				</span>
-				<div v-else class="loading min-h-screen">
-					<div class="spinner"></div>
-				</div>
-			</v-card>
-		</v-col>
-		<v-col cols="12" md="6">
-			<v-card v-if="title" class="bg-grey-lighten-5 px-4 py-6 h-100" border="lg">
-				<v-card-title>Title</v-card-title>
-				<v-card-text>The title of the song is {{ title }}.</v-card-text>
-				<v-card-title>Composition</v-card-title>
-				<v-card-text>The song was written by {{ lyricist }} and composed by {{ composer }}</v-card-text>
-				<v-card-title>Date</v-card-title>
-				<v-card-text>Research suggests the song originated in {{ year }}</v-card-text>
-				<v-card-title>Info</v-card-title>
-				<v-card-text class="text-pre-wrap">{{ short_fact }}</v-card-text>
-			</v-card>
-
-			<v-card v-else class="bg-grey-lighten-5 py-14 h-100" border="lg">
-				<v-card-title>Why don't you try this one:</v-card-title>
-				<v-card-text class="text-grey py-8 px-16">
-					<a :href="`/${randomCountry}`" class="text-decoration-none text-primary">
-						<v-row>
-							<v-col cols="2">
-								<img :src="randomCountryFlag" alt="" />
-							</v-col>
-							<v-col cols="10" class="align-text text-black">{{ randomCountry }}</v-col>
-						</v-row>
-					</a>
-				</v-card-text>
-			</v-card>
-		</v-col>
-	</v-row>
-
-	<v-footer class="bg-grey-darken-4 text-white py-10 fill-height">
-		<v-row justify="center">
-			<v-col cols="12" sm="6" class="text-center">
-				<p>Sponsored by <a href="https://www.novariance.com" class="text-grey">No Variance.com</a></p>
+			<v-col cols="7 mx-auto mt-8">
+				<v-row class="bg-light rounded-xl text-center" style="height: 50vh; overflow-y: auto">
+					<!-- Lyrics or welcome message or loading spinner -->
+					<div
+						v-if="lyrics"
+						id="lyrics"
+						class="text-pre-wrap text-center overflow-auto mx-auto px-8 py-6 text-primary"
+						v-html="lyrics"></div>
+					<span v-else-if="!fetchedData" span>
+						<v-card-title>Explore Our Rich Collection of Songs</v-card-title>
+						<v-card-text
+							>Learn the lyrics and listen to the tunes of national anthems from all over the
+							world!</v-card-text
+						>
+						<v-card-text
+							>Select any country from our dropdown menu at the top or try the random country suggested
+							below!</v-card-text
+						>
+					</span>
+					<div v-else class="loading min-h-screen">
+						<div class="spinner"></div>
+					</div>
+				</v-row>
+				<v-row class="mt-8">
+					<v-card style="height: 13vh" class="w-100 text-primary rounded-xl bg-light">
+						<v-card-title>Why don't you try this one:</v-card-title>
+						<v-card-text class="mt-4 ml-8">
+							<a :href="`/${randomCountry}`" class="text-decoration-none text-primary">
+								<v-row>
+									<v-col cols="2">
+										<img :src="randomCountryFlag" alt="" />
+									</v-col>
+									<v-col cols="10" class="align-text">{{ randomCountry }}</v-col>
+								</v-row>
+							</a>
+						</v-card-text>
+					</v-card>
+				</v-row>
 			</v-col>
 		</v-row>
-	</v-footer>
+	</div>
+		<v-row class="bg-light align-center text-center w-75 mt-8 mx-auto rounded-xl py-6 h-50 text-primary" >
+			<v-col cols="12" class="text-center">
+				<p>Sponsored by <a href="https://www.novariance.com" class="text-primary">No Variance.com</a></p>
+			</v-col>
+		</v-row>
 </template>
 
 <script setup>
@@ -152,7 +160,6 @@
 				.replace(/\[.*?\]/g, "")
 				.replace(".\n", ".\n\n");
 		} else {
-			
 		}
 	});
 
@@ -172,8 +179,9 @@
 
 <style scoped>
 	* {
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
-			sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		font-family: 'D-DIN Condensed', sans-serif;
+		color: primary;
+		border: 0px solid black !important;
 	}
 	/* Flag */
 	.flag-img {
@@ -212,6 +220,26 @@
 	}
 
 	a[href="/"] {
-		text-decoration-color: blueviolet;
+		text-decoration-color: primary;
 	}
+	.v-card {
+		border: none;
+	}
+
+	/* .content .v-row .v-col  {
+		border: 2px solid red;
+	} */
+
+	 html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+    background: transparent
+}
 </style>

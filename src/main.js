@@ -24,6 +24,19 @@ const vuetify = createVuetify({
     VImg,
     VCardText,
     VFooter
+  },
+  theme: {
+    defaultTheme: 'greenTheme',
+    themes: {
+      greenTheme: {
+        dark: false,
+        colors: {
+          primary: '#000701ff',
+          secondary: '#acd4aeff',
+          light: '#96a09a5b'
+        }
+      }
+    }
   }
 })
 
