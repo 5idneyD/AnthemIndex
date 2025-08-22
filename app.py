@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, Response, jsonify
+from flask import Flask, send_from_directory, Response, jsonify, send_file
 import os
 import mimetypes
 # from flask_cors import CORS
@@ -85,7 +85,8 @@ def fetch_country(country):
             "source": data[6],
             "flag_link": data[7],
             "lyrics": data[8],
-            "short_fact": data[-1]
+            "short_fact": data[-2],
+            "vocal_media": "vocals/" + data[-1] if type(data[-1]) is str else ""
         }
     cursor.execute("UPDATE analysis SET visit_count = visit_count + 1 WHERE country = ?", (country,))
     connection.commit()
@@ -112,7 +113,6 @@ def get_countries():
 @app.route("/api/")
 def api_index():
     return jsonify({"message": "Welcome to the Anthem Index API!"})
-
 
 
 # Serve all other routes from Vue

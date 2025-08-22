@@ -22,7 +22,7 @@
 	</v-row>
 
 	<!-- Welcome message or country name, flag and media button -->
-	<v-card class="bg-grey-lighten-5" border="lg">
+	<v-card class="bg-light" border="lg">
 		<v-row v-if="message" justify="center" align="end" class="py-6">
 			<v-col cols="5" sm="6" class="text-center">
 				<v-card-title class="text-wrap">{{ message }}</v-card-title>
@@ -31,7 +31,13 @@
 				<div v-else></div>
 			</v-col>
 			<v-col cols="7" sm="6" class="text-center">
-				<img v-if="flagLink" :src="flagLink" alt="flag" class="flag-img mt-auto mb-auto" width="130px" height="70px"/>
+				<img
+					v-if="flagLink"
+					:src="flagLink"
+					alt="flag"
+					class="flag-img mt-auto mb-auto"
+					width="130px"
+					height="70px" />
 				<div v-else class="loading">
 					<div class="spinner"></div>
 				</div>
@@ -57,7 +63,7 @@
 	<!-- Lyrics and info or random suggestion -->
 	<v-row align="stretch" no-gutters>
 		<v-col cols="12" md="6">
-			<v-card class="bg-grey-lighten-5 px-4 py-6 h-100 w-100" border="lg">
+			<v-card class="bg-light px-4 py-6 h-100 w-100" border="lg">
 				<div v-if="lyrics" id="lyrics" class="text-pre-wrap text-center mt-5" v-html="lyrics"></div>
 				<span v-else-if="!fetchedData" span>
 					<v-card-title>Explore Our Rich Collection of Songs</v-card-title>
@@ -76,7 +82,7 @@
 			</v-card>
 		</v-col>
 		<v-col cols="12" md="6">
-			<v-card v-if="title" class="bg-grey-lighten-5 px-4 py-6 h-100" border="lg">
+			<v-card v-if="title" class="bg-light px-4 py-6 h-100" border="lg">
 				<v-card-title>Title</v-card-title>
 				<v-card-text>The title of the song is {{ title }}.</v-card-text>
 				<v-card-title>Composition</v-card-title>
@@ -87,7 +93,7 @@
 				<v-card-text class="text-pre-wrap">{{ short_fact }}</v-card-text>
 			</v-card>
 
-			<v-card v-else class="bg-grey-lighten-5 py-14 h-100" border="lg">
+			<v-card v-else class="bg-light py-14 h-100" border="lg">
 				<v-card-title>Why don't you try this one:</v-card-title>
 				<v-card-text class="text-grey py-8 px-16">
 					<a :href="`/${randomCountry}`" class="text-decoration-none text-primary">
@@ -106,7 +112,7 @@
 	<v-footer class="bg-grey-darken-4 text-white py-10 fill-height">
 		<v-row justify="center">
 			<v-col cols="12" sm="6" class="text-center">
-				<p>Sponsored by <a href="https://www.novariance.com" class="text-grey">No Variance.com</a></p>
+				<p>Sponsored by <a href="https://www.novariance.com" class="text-light">No Variance.com</a></p>
 			</v-col>
 		</v-row>
 	</v-footer>
@@ -137,7 +143,10 @@
 			const res = await fetch("/api/" + fetchedCountry);
 			const data = await res.json();
 			message.value = data.country ? data.country : none;
-			sourceURL.value = data.source;
+			sourceURL.value =
+				data.vocal_media && data.vocal_media !== ""
+					? window.location.origin + "/" + data.vocal_media
+					: data.source;
 			flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : none;
 			lyrics.value = data.lyrics.replace(
 				/\n\n\n/g,
@@ -152,7 +161,6 @@
 				.replace(/\[.*?\]/g, "")
 				.replace(".\n", ".\n\n");
 		} else {
-			
 		}
 	});
 
