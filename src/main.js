@@ -6,7 +6,7 @@ import '@mdi/font/css/materialdesignicons.css'
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import { VProgressCircular, VApp, VAppBar, VMain, VCard, VCardTitle, VAutocomplete, VImg, VCardText, VFooter, VBtn, VIcon, VRow, VCol, VSelect } from 'vuetify/components'
+import { VProgressCircular, VAlert, VApp, VAppBar, VMain, VCard, VCardTitle, VAutocomplete, VImg, VCardText, VFooter, VBtn, VIcon, VRow, VCol, VSelect } from 'vuetify/components'
 const vuetify = createVuetify({
   components: {
     VProgressCircular,
@@ -23,7 +23,8 @@ const vuetify = createVuetify({
     VAutocomplete,
     VImg,
     VCardText,
-    VFooter
+    VFooter,
+    VAlert
   },
     theme: {
     defaultTheme: 'greenTheme',

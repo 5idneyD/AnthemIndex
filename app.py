@@ -100,11 +100,11 @@ def get_countries():
     cursor = connection.cursor()
 
     # Fetch just the country column
-    cursor.execute("SELECT state, flag_link FROM anthems")
+    cursor.execute("SELECT state, flag_link, Audio FROM anthems")
     rows = cursor.fetchall()
 
     # Flatten list of tuples into a list of strings
-    all_anthem_data = [[row[0], row[1]] for row in rows]
+    all_anthem_data = [[row[0], row[1], row[2]] for row in rows]
     all_anthem_data.append("All Countries")  # Add "All Countries" option
 
     connection.close()

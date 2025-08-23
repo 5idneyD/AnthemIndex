@@ -75,6 +75,7 @@
 						>Select any country from our dropdown menu at the top or try the random country suggested
 						below!</v-card-text
 					>
+					<v-card-text>You can also try our multiple choice quiz of national anthems!</v-card-text>
 				</span>
 				<div v-else class="loading min-h-screen">
 					<div class="spinner"></div>
@@ -105,6 +106,10 @@
 						</v-row>
 					</a>
 				</v-card-text>
+				<v-card-title>Or play our Quiz:</v-card-title>
+				<v-card-text class="text-grey py-8 px-16">
+					<Quiz/>
+				</v-card-text>
 			</v-card>
 		</v-col>
 	</v-row>
@@ -121,6 +126,7 @@
 <script setup>
 	import { ref, onMounted } from "vue";
 	import MediaButton from "./MediaControl.vue";
+	import Quiz from "./Quiz.vue";
 	const message = ref("");
 	const sourceURL = ref("");
 	const flagLink = ref("");
@@ -134,6 +140,7 @@
 	const selectedCountry = ref("");
 	const randomCountry = ref("");
 	const randomCountryFlag = ref("");
+
 	const fetchedData = ref(false);
 
 	onMounted(async () => {
@@ -176,6 +183,8 @@
 	function selectCountry() {
 		window.location.href = `/${selectedCountry.value}`;
 	}
+
+	
 </script>
 
 <style scoped>
