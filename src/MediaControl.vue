@@ -1,6 +1,6 @@
 <template>
-	<v-btn class="bg-grey-darken-4" id="mediaControl" @click="togglePlay">
-		<v-icon color="white">
+	<v-btn class="bg-dark" id="mediaControl" @click="togglePlay">
+		<v-icon color="light">
 			{{ isPlaying ? "mdi-pause" : "mdi-play" }}
 		</v-icon>
 	</v-btn>

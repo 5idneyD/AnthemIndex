@@ -32,7 +32,10 @@ const vuetify = createVuetify({
       greenTheme: {
         dark: false,
         colors: {
-          light: '#e5f4e3'
+          primary: '#CFFFE2',
+          accent: '#A2D5C6',
+          dark: '#000000',
+          light: '#F6F6F6'
         }
       }
     }

@@ -2,22 +2,28 @@
 	<v-row>
 		<!-- Media player -->
 		<video :src="correctAnswer[1]" @timeupdate="updateTime"></video>
-		<MediaButton class="px-14 ml-3" />
+        <v-col cols="12">
+            <MediaButton class="px-14" />
+            <v-btn @click="newQuiz" color="accent" class="ml-4">
+			    <v-icon>mdi-refresh</v-icon>
+		    </v-btn>
+        </v-col>
+		
 	</v-row>
 	<v-row>
 		<!-- Quiz buttons -->
-		<v-col cols="12" md="8">
+		<v-col cols="12">
 			<v-row dense justify="space-between">
 				<v-col
 					v-for="(country, index) in quizCountries"
 					:key="index"
 					cols="12"
-					md="4"
+					md=""
 					class="d-flex justify-center">
 					<v-btn
 						block
 						:color="getButtonColor(country)"
-						class="rounded-lg px-12 wrap-text"
+						class="rounded-lg px-12 text-truncate"
 						:disabled="answered"
 						@click="submitQuizAnswer(country)">
 						{{ country }}
@@ -50,6 +56,7 @@
 	import MediaButton from "./MediaControl.vue";
 
 	const countries = ref([]);
+	let data = ref();
 	const quizCountries = ref([]);
 	const correctAnswer = ref([]); // [country, media]
 	const answered = ref(false);
@@ -58,7 +65,7 @@
 
 	onMounted(async () => {
 		const res = await fetch("/api/countries");
-		const data = await res.json();
+		data = await res.json();
 		countries.value = data.map((row) => row[0]);
 		let ind = 0;
 		// pick 3 random unique countries
@@ -80,11 +87,27 @@
 	}
 
 	function getButtonColor(country) {
-		if (!answered.value) return "grey-darken-4";
+		if (!answered.value) return "dark";
 
 		if (country === correctAnswer.value[0]) return "success"; // highlight correct
 		if (country === submittedAnswer.value) return "error"; // highlight wrong guess
 		return "grey"; // fade others
+	}
+
+	function newQuiz() {
+		let ind = 0;
+
+		// pick 3 random unique countries
+		const quizCountriesArray = new Set();
+		while (quizCountriesArray.size < 3) {
+			ind = Math.floor(Math.random() * data.length);
+			quizCountriesArray.add(data[ind][0]);
+		}
+		// set correct answer (last picked from loop)
+		correctAnswer.value = [data[ind][0], data[ind][2]];
+		quizCountries.value = [...quizCountriesArray].sort();
+
+		answered.value = false;
 	}
 </script>
 
@@ -96,6 +119,4 @@
 	#MediaControl {
 		margin-left: 4%;
 	}
-
-
 </style>

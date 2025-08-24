@@ -1,13 +1,13 @@
 <template>
 	<!-- Header of the page -->
-	<v-row class="bg-grey-darken-4 align-center text-center" no-gutters>
-		<v-col cols="6" lg="5">
+	<v-row class="bg-dark align-center text-center" no-gutters>
+		<v-col cols="7" lg="5">
 			<v-card-title>
-				<a href="/" class="text-white">Anthem Index 🌍</a>
+				<a href="/" class="text-primary">Anthem Index 🌍</a>
 			</v-card-title>
 		</v-col>
 		<v-col cols="0" lg="3" class="hidden-md-and-down"></v-col>
-		<v-col cols="6" lg="4">
+		<v-col cols="5" lg="4">
 			<v-autocomplete
 				v-model="selectedCountry"
 				:items="countries"
@@ -22,7 +22,7 @@
 	</v-row>
 
 	<!-- Welcome message or country name, flag and media button -->
-	<v-card class="bg-light" border="lg">
+	<v-card class="bg-primary" border="lg">
 		<v-row v-if="message" justify="center" align="end" class="py-6">
 			<v-col cols="5" sm="6" class="text-center">
 				<v-card-title class="text-wrap">{{ message }}</v-card-title>
@@ -63,10 +63,10 @@
 	<!-- Lyrics and info or random suggestion -->
 	<v-row align="stretch" no-gutters>
 		<v-col cols="12" md="6">
-			<v-card class="bg-light px-4 py-6 h-100 w-100" border="lg">
+			<v-card class="bg-primary px-4 py-6 h-100 w-100" border="lg">
 				<div v-if="lyrics" id="lyrics" class="text-pre-wrap text-center mt-5" v-html="lyrics"></div>
 				<span v-else-if="!fetchedData" span>
-					<v-card-title>Explore Our Rich Collection of Songs</v-card-title>
+					<v-card-title class="text-pre-wrap">Explore Our Rich Collection of Songs</v-card-title>
 					<v-card-text
 						>Learn the lyrics and listen to the tunes of national anthems from all over the
 						world!</v-card-text
@@ -83,7 +83,7 @@
 			</v-card>
 		</v-col>
 		<v-col cols="12" md="6">
-			<v-card v-if="title" class="bg-light px-4 py-6 h-100" border="lg">
+			<v-card v-if="title" class="bg-primary px-4 py-6 h-100" border="lg">
 				<v-card-title>Title</v-card-title>
 				<v-card-text>The title of the song is {{ title }}.</v-card-text>
 				<v-card-title>Composition</v-card-title>
@@ -94,7 +94,7 @@
 				<v-card-text class="text-pre-wrap">{{ short_fact }}</v-card-text>
 			</v-card>
 
-			<v-card v-else class="bg-light py-14 h-100" border="lg">
+			<v-card v-else class="bg-primary py-14 h-100" border="lg">
 				<v-card-title>Why don't you try this one:</v-card-title>
 				<v-card-text class="text-grey py-8 px-16">
 					<a :href="`/${randomCountry}`" class="text-decoration-none text-primary">
@@ -114,10 +114,10 @@
 		</v-col>
 	</v-row>
 
-	<v-footer class="bg-grey-darken-4 text-white py-10 fill-height">
+	<v-footer class="bg-dark text-light py-10 fill-height">
 		<v-row justify="center">
 			<v-col cols="12" sm="6" class="text-center">
-				<p>Sponsored by <a href="https://www.novariance.com" class="text-light">No Variance.com</a></p>
+				<p>Sponsored by <a href="https://www.novariance.com" class="text-primary">No Variance.com</a></p>
 			</v-col>
 		</v-row>
 	</v-footer>
@@ -229,6 +229,6 @@
 	}
 
 	a[href="/"] {
-		text-decoration-color: blueviolet;
+		text-decoration-color: #A2D5C6;
 	}
 </style>
