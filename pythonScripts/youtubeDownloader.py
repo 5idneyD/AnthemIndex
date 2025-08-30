@@ -6,7 +6,7 @@ url = {"state": "Canada", "link": "https://music.youtube.com/watch?v=JpFDNzrWK7Q
 
 ydl_opts = {
     "format": "bestaudio/best",
-    "download_ranges": lambda info, ydl: [{"start_time": 30, "end_time": 266}],  # accept 2 args
+    "download_ranges": lambda info, ydl: [{"start_time": 0, "end_time": 266}],  # accept 2 args
     "outtmpl": "C:/Dev/WebDev/AnthemIndex/public/vocals/%(title)s.%(ext)s",
     "postprocessors": [
         {
