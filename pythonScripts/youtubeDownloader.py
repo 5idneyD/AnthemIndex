@@ -2,7 +2,7 @@ import yt_dlp
 import sqlite3
 
 
-url = {"state": "Scotland", "link": "https://www.youtube.com/watch?v=-YaHlR3jGFg"}
+url = {"state": "Canada", "link": "https://music.youtube.com/watch?v=JpFDNzrWK7Q"}
 
 ydl_opts = {
     "format": "bestaudio/best",
@@ -22,7 +22,7 @@ with yt_dlp.YoutubeDL(ydl_opts) as ydl:
     file_path = ydl.prepare_filename(info_dict)  # 👈 this gives you the expanded filename
     final_file_name = file_path.split("\\")[-1].replace(".webm", ".mp3")
     
-connection = sqlite3.connect("./anthems.db")
+connection = sqlite3.connect(r"C:\Dev\WebDev\AnthemIndex\anthems.db")
 c = connection.cursor()
 c.execute("UPDATE anthems set vocal_media=? where state=?", (final_file_name, url['state']))
 connection.commit()
