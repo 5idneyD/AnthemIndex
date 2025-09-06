@@ -4,7 +4,7 @@
 		<video :src="correctAnswer[1]" @timeupdate="updateTime"></video>
         <v-col cols="12">
             <MediaButton class="px-14" />
-            <v-btn @click="newQuiz" color="accent" class="ml-4">
+            <v-btn @click="newQuiz" color="accent" class="mx-auto my-2">
 			    <v-icon>mdi-refresh</v-icon>
 		    </v-btn>
         </v-col>
@@ -40,7 +40,8 @@
 				:type="isCorrect ? 'success' : 'error'"
 				class="mt-4"
 				border="start"
-				variant="tonal">
+
+				>
 				{{
 					isCorrect
 						? "✅ Correct! That is " + correctAnswer[0]

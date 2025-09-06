@@ -6,9 +6,12 @@ import '@mdi/font/css/materialdesignicons.css'
 // Vuetify
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
-import { VProgressCircular, VAlert, VApp, VAppBar, VMain, VCard, VCardTitle, VAutocomplete, VImg, VCardText, VFooter, VBtn, VIcon, VRow, VCol, VSelect } from 'vuetify/components'
+import { VProgressCircular, VAlert, VContainer,VToolbarTitle, VSpacer, VApp, VAppBar, VMain, VCard, VCardTitle, VAutocomplete, VImg, VCardText, VFooter, VBtn, VIcon, VRow, VCol, VSelect } from 'vuetify/components'
 const vuetify = createVuetify({
   components: {
+    VToolbarTitle,
+    VSpacer,
+    VContainer,
     VProgressCircular,
     VApp,
     VAppBar,

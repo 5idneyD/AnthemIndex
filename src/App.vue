@@ -1,128 +1,119 @@
 <template>
-	<!-- Header of the page -->
-	<v-row class="bg-dark align-center text-center" no-gutters>
-		<v-col cols="7" lg="5">
-			<v-card-title>
-				<a href="/" class="text-primary">Anthem Index 🌍</a>
-			</v-card-title>
-		</v-col>
-		<v-col cols="0" lg="3" class="hidden-md-and-down"></v-col>
-		<v-col cols="5" lg="4">
-			<v-autocomplete
-				v-model="selectedCountry"
-				:items="countries"
-				item-title="name"
-				item-value="name"
-				label="Select a country"
-				@update:modelValue="selectCountry"
-				outlined
-				dense
-				hide-details />
-		</v-col>
-	</v-row>
-
-	<!-- Welcome message or country name, flag and media button -->
-	<v-card class="bg-primary" border="lg">
-		<v-row v-if="message" justify="center" align="end" class="py-6">
-			<v-col cols="5" sm="6" class="text-center">
-				<v-card-title class="text-wrap">{{ message }}</v-card-title>
-				<video :src="sourceURL" @timeupdate="updateTime"></video>
-				<MediaButton v-if="sourceURL" class="w-25 ml-25 px-14" />
-				<div v-else></div>
+	<v-app class="bg-neutral">
+		<!-- Header -->
+		<v-app-bar flat color="primary" class="px-6 py-4 border-thick">
+			<v-col cols="8" lg="7">
+				<v-card-title>
+					<a href="/" class="text-black text-center">Anthem Index 🌍</a>
+				</v-card-title>
 			</v-col>
-			<v-col cols="7" sm="6" class="text-center">
-				<img
-					v-if="flagLink"
-					:src="flagLink"
-					alt="flag"
-					class="flag-img mt-auto mb-auto"
-					width="130px"
-					height="70px" />
-				<div v-else class="loading">
-					<div class="spinner"></div>
-				</div>
-			</v-col>
-		</v-row>
-		<v-row v-else justify="center" align="center" class="py-14">
-			<v-col v-if="!fetchedData" cols="6" lg="7" class="text-center py-8">
-				<v-card-title class="text-wrap">Welcome to Anthem Index!</v-card-title>
-			</v-col>
-			<div v-else class="loading">
-				<div class="spinner"></div>
-			</div>
 			<v-col cols="0" lg="1" class="hidden-md-and-down"></v-col>
-			<v-col cols="6" lg="4">
-				<v-img
-					src="https://cdn.pixabay.com/photo/2016/02/04/13/40/the-earth-1179205_1280.png"
-					alt="Earth Globe"
-					class="flag-img w-50 h-50"></v-img>
+			<v-col cols="4" lg="4">
+				<v-autocomplete
+					v-model="selectedCountry"
+					:items="countries"
+					item-title="name"
+					item-value="name"
+					label="Select a country"
+					hide-details
+					variant="outlined"
+					class="neo-input"
+					@update:modelValue="selectCountry" />
 			</v-col>
-		</v-row>
-	</v-card>
-
-	<!-- Lyrics and info or random suggestion -->
-	<v-row align="stretch" no-gutters>
-		<v-col cols="12" md="6">
-			<v-card class="bg-primary px-4 py-6 h-100 w-100" border="lg">
-				<div v-if="lyrics" id="lyrics" class="text-pre-wrap text-center mt-5" v-html="lyrics"></div>
-				<span v-else-if="!fetchedData" span>
-					<v-card-title class="text-pre-wrap">Explore Our Rich Collection of Songs</v-card-title>
-					<v-card-text
-						>Learn the lyrics and listen to the tunes of national anthems from all over the
-						world!</v-card-text
-					>
-					<v-card-text
-						>Select any country from our dropdown menu at the top or try the random country suggested
-						below!</v-card-text
-					>
-					<v-card-text>You can also try our multiple choice quiz of national anthems!</v-card-text>
-				</span>
-				<div v-else class="loading min-h-screen">
-					<div class="spinner"></div>
-				</div>
-			</v-card>
-		</v-col>
-		<v-col cols="12" md="6">
-			<v-card v-if="title" class="bg-primary px-4 py-6 h-100" border="lg">
-				<v-card-title>Title</v-card-title>
-				<v-card-text>The title of the song is {{ title }}.</v-card-text>
-				<v-card-title>Composition</v-card-title>
-				<v-card-text>The song was written by {{ lyricist }} and composed by {{ composer }}</v-card-text>
-				<v-card-title>Date</v-card-title>
-				<v-card-text>Research suggests the song originated in {{ year }}</v-card-text>
-				<v-card-title>Info</v-card-title>
-				<v-card-text class="text-pre-wrap">{{ short_fact }}</v-card-text>
-			</v-card>
-
-			<v-card v-else class="bg-primary py-14 h-100" border="lg">
-				<v-card-title>Why don't you try this one:</v-card-title>
-				<v-card-text class="text-grey py-8 px-16">
-					<a :href="`/${randomCountry}`" class="text-decoration-none text-primary">
-						<v-row>
-							<v-col cols="2">
-								<img :src="randomCountryFlag" alt="" />
-							</v-col>
-							<v-col cols="10" class="align-text text-black">{{ randomCountry }}</v-col>
-						</v-row>
-					</a>
-				</v-card-text>
-				<v-card-title>Or play our Quiz:</v-card-title>
-				<v-card-text class="text-grey py-8 px-16">
-					<Quiz/>
-				</v-card-text>
-			</v-card>
-		</v-col>
-	</v-row>
-
-	<v-footer class="bg-dark text-light py-10 fill-height">
-		<v-row justify="center">
-			<v-col cols="12" sm="6" class="text-center">
-				<p>Sponsored by <a href="https://www.novariance.com" class="text-primary">No Variance.com</a></p>
-			</v-col>
-		</v-row>
-	</v-footer>
+		</v-app-bar>
+		<!-- Main Content -->
+		<v-main class="px-6 py-10">
+			<v-container fluid>
+				<v-row class="gap-6" align="stretch">
+					<!-- Left column: Info + Media -->
+					<v-col cols="12" md="6">
+						<div class="neo-card px-8 mt-14 py-6 flex flex-col overflow-auto">
+							<v-row v-if="message" justify="center" class="py-6">
+								<v-col cols="7" sm="6" class="text-center">
+									<v-card-title class="">{{ message }}</v-card-title>
+									<video :src="sourceURL" @timeupdate="updateTime" class="d-none"></video>
+									<MediaButton v-if="sourceURL" class="w-25 ml-25 mt-4 px-14" />
+									<div v-else></div>
+								</v-col>
+								<v-col cols="5" sm="4" class="text-center">
+									<img
+										v-if="flagLink"
+										:src="flagLink"
+										alt="flag"
+										class="flag-img mt-6 mb-auto"
+										width="110px"
+										height="70px" />
+									<div v-else class="loading">
+										<div class="spinner"></div>
+									</div>
+								</v-col>
+							</v-row>
+							<div v-else-if="!fetchedData" class="text-center">
+								<h2 class="text-xl font-bold mb-4">Welcome to Anthem Index!</h2>
+								<v-img
+									src="https://cdn.pixabay.com/photo/2016/02/04/13/40/the-earth-1179205_1280.png"
+									alt="Earth Globe"
+									max-width="180"
+									class="mx-auto my-14" />
+								<v-card-title>Play our Quiz:</v-card-title>
+								<v-card-text class="text-grey py-8 px-16">
+									<Quiz />
+								</v-card-text>
+							</div>
+							<div v-else class="loading"><div class="spinner"></div></div>
+							<!-- Song details -->
+							<div v-if="title" class="mt-8">
+								<h3 class="font-bold mb-2">Title</h3>
+								<p>{{ title }}</p>
+								<h3 class="font-bold mt-4 mb-2">Composition</h3>
+								<p>{{ lyricist }} & {{ composer }}</p>
+								<h3 class="font-bold mt-4 mb-2">Date</h3>
+								<p>{{ year }}</p>
+								<h3 class="font-bold mt-4 mb-2">Info</h3>
+								<p class="text-pre-wrap">{{ short_fact }}</p>
+							</div>
+						</div>
+					</v-col>
+					<!-- Right column: Lyrics + Suggestion -->
+					<v-col cols="12" md="6" class="d-flex flex-column gap-6">
+						<div class="neo-card h-50 px-8 mt-14 py-6 flex flex-col flex-1 overflow-auto">
+							<div v-if="lyrics" id="lyrics" class="text-pre-wrap text-center pt-8" v-html="lyrics"></div>
+							<div v-else-if="!fetchedData">
+								<h2 class="font-bold mb-4">Explore Our Rich Collection of Songs</h2>
+								<p>
+									Learn the lyrics and listen to the tunes of national anthems from all over the
+									world!
+								</p>
+								<br />
+								<p>
+									Select any country from our dropdown menu at the top or try the random country
+									suggested below!
+								</p>
+							</div>
+							<div v-else class="loading min-h-[200px]"><div class="spinner"></div></div>
+						</div>
+						<div class="neo-card mt-6 px-12 py-8" style="min-height: 150px">
+							<h3 class="font-bold mb-8">Why don't you try this one:</h3>
+							<a :href="'/' + randomCountry" class="text-primary mt-4">
+								<img :src="randomCountryFlag" alt="flag" />
+								<span class="font-bold ml-8 mt-6">{{ randomCountry }}</span>
+							</a>
+						</div>
+					</v-col>
+				</v-row>
+			</v-container>
+		</v-main>
+		<!-- Footer -->
+		<v-footer class="bg-primary border-thick">
+			<v-container class="text-center text-black">
+				<p>
+					Sponsored by
+					<a href="https://www.novariance.com" class="text-black underline">No Variance.com</a>
+				</p>
+			</v-container>
+		</v-footer>
+	</v-app>
 </template>
-
 <script setup>
 	import { ref, onMounted } from "vue";
 	import MediaButton from "./MediaControl.vue";
@@ -186,49 +177,50 @@
 
 	
 </script>
-
 <style scoped>
-	* {
-		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
-			sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	.bg-neutral {
+		background-color: #8bd48d;
 	}
-	/* Flag */
-	.flag-img {
-		max-width: 200px;
-		margin-bottom: 1rem;
+	.border-thick {
+		border: 3px solid black !important;
 	}
-
-	/* Loading state */
-	.loading {
-		display: flex;
-		flex: 1;
-		flex-direction: column;
-		align-items: center;
-		gap: 1rem;
-		font-size: 1.25rem;
-		font-weight: 600;
+	.neo-card {
+		/* /background: #ffffff; */
+		background-color: #389b64;
+		color: #e9f0e9;
+		border: 3px solid black;
+		box-shadow: 6px 6px 0px #000;
+		border-radius: 0;
+		min-height: 50vh;
+		max-height: 90vh;
 	}
-
+	.neo-input .v-field__input {
+		border: 3px solid black;
+		box-shadow: 4px 4px 0px #000;
+		background-color: #fff !important;
+	}
+	.neo-divider {
+		border: 2px solid black;
+		margin: 1rem auto;
+		width: 60%;
+	}
 	.spinner {
-		border: 6px solid rgba(66, 184, 131, 0.3);
-		border-top: 6px solid #dae6e3;
+		border: 6px solid rgba(0, 0, 0, 0.1);
+		border-top: 6px solid #000;
 		border-radius: 50%;
 		width: 48px;
 		height: 48px;
-		animation: spin 1.1s linear infinite;
+		animation: spin 1s linear infinite;
+	}
+
+	a {
+		white-space: nowrap;
+		overflow: visible;
 	}
 
 	@keyframes spin {
 		to {
 			transform: rotate(360deg);
 		}
-	}
-
-	video {
-		display: none;
-	}
-
-	a[href="/"] {
-		text-decoration-color: #A2D5C6;
 	}
 </style>
