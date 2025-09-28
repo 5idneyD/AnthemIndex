@@ -31,8 +31,19 @@
 							<v-row v-if="message" justify="center" class="py-6">
 								<v-col cols="7" sm="6" class="text-center">
 									<v-card-title class="">{{ message }}</v-card-title>
-									<video :src="sourceURL" @timeupdate="updateTime" class="d-none"></video>
-									<MediaButton v-if="sourceURL" class="w-25 ml-25 mt-4 px-14" />
+									<video :src="selectedSource" @timeupdate="updateTime" class="d-none"></video>
+									<span v-if="selectedSource">
+										<MediaButton class="w-25 ml-25 mt-4 px-14" />
+										<v-switch
+											inset
+											color="dark"
+											class="ml-4 text-caption"
+											
+											@change="switchAnthemType"
+											:label="vocalSourceURL && sourceURL ? selectedAnthemType: ''"
+											:disabled="!vocalSourceURL || !sourceURL">
+										</v-switch>
+									</span>
 									<div v-else></div>
 								</v-col>
 								<v-col cols="5" sm="4" class="text-center">
@@ -120,6 +131,9 @@
 	import Quiz from "./Quiz.vue";
 	const message = ref("");
 	const sourceURL = ref("");
+	const vocalSourceURL = ref("");
+	const selectedAnthemType = ref("Vocal"); // not true/false
+	const selectedSource = ref("");
 	const flagLink = ref("");
 	const lyrics = ref("");
 	const lyricist = ref("");
@@ -141,19 +155,22 @@
 			const res = await fetch("/api/" + fetchedCountry);
 			const data = await res.json();
 			message.value = data.country ? data.country : none;
-			sourceURL.value =
+			sourceURL.value = data.source && data.source !== "" ? data.source : null;
+			vocalSourceURL.value =
+				data.vocal_media && data.vocal_media !== "" ? window.location.origin + "/" + data.vocal_media : null;
+			selectedSource.value =
 				data.vocal_media && data.vocal_media !== ""
 					? window.location.origin + "/" + data.vocal_media
 					: data.source;
-			flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : none;
+			flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : null;
 			lyrics.value = data.lyrics.replace(
 				/\n\n\n/g,
-				'\n\n<hr style="border: 1px solid grey; margin: 1rem auto; width: 60%;">\n',
+				'\n\n<hr style="border: 1px solid white; margin: 1rem auto; width: 60%;">\n',
 			);
 			lyricist.value = data.lyricist;
 			composer.value = data.composer;
 			year.value = data.year;
-			title.value = data.anthem_name ? data.anthem_name : none;
+			title.value = data.anthem_name ? data.anthem_name : null;
 			short_fact.value = data.short_fact
 				.replace(". ", ". \n\n")
 				.replace(/\[.*?\]/g, "")
@@ -175,7 +192,20 @@
 		window.location.href = `/${selectedCountry.value}`;
 	}
 
-	
+	function switchAnthemType() {
+		if (selectedAnthemType.value === "Vocal") {
+			selectedSource.value = sourceURL.value;
+			selectedAnthemType.value = "Non-Vocal";
+		} else if (selectedAnthemType.value === "Non-Vocal") {
+			selectedSource.value = vocalSourceURL.value;
+			selectedAnthemType.value = "Vocal";
+		} else {
+			// default (first switch)
+			selectedSource.value = vocalSourceURL.value;
+			selectedAnthemType.value = "Vocal";
+		}
+
+	}
 </script>
 <style scoped>
 	.bg-neutral {
