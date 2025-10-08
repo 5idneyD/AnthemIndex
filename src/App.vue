@@ -1,10 +1,10 @@
 <template>
 	<v-app class="bg-neutral">
 		<!-- Header -->
-		<v-app-bar flat color="primary" class="px-6 py-4 border-thick">
+		<v-app-bar flat class="px-6 py-4 border-thick" id="header">
 			<v-col cols="8" lg="7">
 				<v-card-title>
-					<a href="/" class="text-black text-center">Anthem Index 🌍</a>
+					<a href="/" class="text-center">Anthem Index 🌍</a>
 				</v-card-title>
 			</v-col>
 			<v-col cols="0" lg="1" class="hidden-md-and-down"></v-col>
@@ -105,9 +105,9 @@
 						</div>
 						<div class="neo-card mt-6 px-12 py-8" style="min-height: 150px">
 							<h3 class="font-bold mb-8">Why don't you try this one:</h3>
-							<a :href="'/' + randomCountry" class="text-primary mt-4">
+							<a :href="'/' + randomCountry" class="mt-4">
 								<img :src="randomCountryFlag" alt="flag" />
-								<span class="font-bold ml-8 mt-6">{{ randomCountry }}</span>
+								<span class="font-bold ml-8 mt-4">{{ randomCountry }}</span>
 							</a>
 						</div>
 					</v-col>
@@ -209,20 +209,33 @@
 </script>
 <style scoped>
 	.bg-neutral {
-		background-color: #8bd48d;
+		background-color: #031628;
 	}
 	.border-thick {
 		border: 3px solid black !important;
 	}
+	#header {
+		background-color: #b7c4ce;
+	}
+	#header a {
+		color: #031628;
+		font-weight: bold;
+		text-decoration: none;
+	}
 	.neo-card {
 		/* /background: #ffffff; */
-		background-color: #389b64;
-		color: #e9f0e9;
-		border: 3px solid black;
-		box-shadow: 6px 6px 0px #000;
-		border-radius: 0;
+		background-color: #b7c4ce;
+		color: #031628;
+		/* border: 3px solid black; */
+		/* box-shadow: 6px 6px 0px #000; */
+		border-radius: 20px;
 		min-height: 50vh;
 		max-height: 90vh;
+	}
+
+	.neo-card a{
+		color: #031628;
+		text-decoration: none;
 	}
 	.neo-input .v-field__input {
 		border: 3px solid black;
