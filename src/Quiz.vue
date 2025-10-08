@@ -4,7 +4,7 @@
 		<video :src="correctAnswer[1]" @timeupdate="updateTime"></video>
         <v-col cols="12">
             <MediaButton class="px-14" />
-            <v-btn @click="newQuiz" color="accent" class="mx-auto my-2">
+            <v-btn @click="newQuiz"   class="mx-auto my-2 bg-blue-grey-darken-4" id="refresh">
 			    <v-icon>mdi-refresh</v-icon>
 		    </v-btn>
         </v-col>
@@ -38,14 +38,12 @@
 			<v-alert
 				v-if="answered"
 				:type="isCorrect ? 'success' : 'error'"
-				class="mt-4"
+				class="mt-4 pl-3"
 				border="start"
-
-				>
-				{{
+				>{{
 					isCorrect
-						? "✅ Correct! That is " + correctAnswer[0]
-						: "❌ Incorrect. The answer was " + correctAnswer[0]
+						? "Correct!"
+						: "Incorrect."
 				}}
 			</v-alert>
 		</v-col>
@@ -88,11 +86,11 @@
 	}
 
 	function getButtonColor(country) {
-		if (!answered.value) return "dark";
+		if (!answered.value) return "blue-grey-darken-4";
 
 		if (country === correctAnswer.value[0]) return "success"; // highlight correct
 		if (country === submittedAnswer.value) return "error"; // highlight wrong guess
-		return "grey"; // fade others
+		return "blue-grey-darken-4"; // fade others
 	}
 
 	function newQuiz() {
@@ -119,5 +117,9 @@
 
 	#MediaControl {
 		margin-left: 4%;
+	}
+
+	#refresh {
+		color: white;
 	}
 </style>

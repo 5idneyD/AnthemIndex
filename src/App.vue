@@ -115,11 +115,11 @@
 			</v-container>
 		</v-main>
 		<!-- Footer -->
-		<v-footer class="bg-primary border-thick">
-			<v-container class="text-center text-black">
+		<v-footer class="border-thick" id="footer">
+			<v-container class="text-center">
 				<p>
 					Sponsored by
-					<a href="https://www.novariance.com" class="text-black underline">No Variance.com</a>
+					<a href="https://www.novariance.com" class="underline">No Variance.com</a>
 				</p>
 			</v-container>
 		</v-footer>
@@ -214,10 +214,10 @@
 	.border-thick {
 		border: 3px solid black !important;
 	}
-	#header {
+	#header, #footer {
 		background-color: #b7c4ce;
 	}
-	#header a {
+	#header a, #footer a {
 		color: #031628;
 		font-weight: bold;
 		text-decoration: none;
