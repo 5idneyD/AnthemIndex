@@ -1,5 +1,5 @@
 <template>
-	<v-btn class="bg-blue-grey-darken-4" id="mediaControl" @click="togglePlay">
+	<v-btn id="mediaControl" @click="togglePlay">
 		<v-icon color="light">
 			{{ isPlaying ? "mdi-pause" : "mdi-play" }}
 		</v-icon>
@@ -8,7 +8,7 @@
 
 <script setup>
 	import { ref } from "vue";
-
+	import '@/assets/colours.css'
 	const isPlaying = ref(false);
 
 	function togglePlay() {
@@ -22,3 +22,9 @@
 		}
 	}
 </script>
+
+<style scoped>
+.v-btn {
+	background-color: var(--buttonColour);
+}
+</style>

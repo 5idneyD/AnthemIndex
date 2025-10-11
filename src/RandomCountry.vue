@@ -1,9 +1,9 @@
 <template>
 	<div class="neo-card mt-6 px-12 py-8" style="min-height: 150px">
 		<h3 class="font-bold mb-8">Why don't you try this one:</h3>
-		<a :href="'/' + randomCountry" class="mt-4">
+		<a :href="'/' + randomCountry" class="mt-2">
 			<img :src="randomCountryFlag" alt="flag" />
-			<span class="font-bold ml-8 mt-4">{{ randomCountry }}</span>
+			<span class="ml-8">{{ randomCountry }}</span>
 		</a>
 	</div>
 </template>
@@ -22,3 +22,13 @@
 		randomCountryFlag.value = data[ind][1];
 	});
 </script>
+
+<style scoped>
+span {
+	color: var(--buttonColor);
+}
+
+a {
+	text-decoration: none;
+}
+</style>

@@ -6,28 +6,29 @@
 				<v-row justify="center" class="py-6">
 					<v-col cols="7" sm="6" class="text-center">
 						<v-card-title class="">{{ message }}</v-card-title>
-						<video :src="selectedSource" @timeupdate="updateTime" class="d-none"></video>
-						<span v-if="selectedSource">
-							<MediaButton class="w-25 ml-25 mt-4 px-14" />
-							<v-switch
-								inset
-								color="dark"
-								class="ml-4 text-caption"
-								@change="switchAnthemType"
-								:label="vocalSourceURL && sourceURL ? selectedAnthemType : ''"
-								:disabled="!vocalSourceURL || !sourceURL">
-							</v-switch>
-						</span>
-						<div v-else></div>
-					</v-col>
-					<v-col cols="5" sm="4" class="text-center">
-						<img
+                        <img
 							v-if="flagLink"
 							:src="flagLink"
 							alt="flag"
 							class="flag-img mt-6 mb-auto"
 							width="110px"
 							height="70px" />
+						<div v-else></div>
+					</v-col>
+					<v-col cols="5" sm="4" class="text-center">
+						<video :src="selectedSource" @timeupdate="updateTime" class="d-none"></video>
+						<span v-if="selectedSource">
+							<MediaButton class="w-25 ml-25 mt-4 px-14" />
+							<v-switch
+								inset
+								color="dark"
+								class="ml-6 text-caption"
+								@change="switchAnthemType"
+								:disabled="!vocalSourceURL || !sourceURL">
+							</v-switch>
+                            <p v-text="vocalSourceURL && sourceURL ? selectedAnthemType : ''"
+                            </p>
+						</span>
 						<div v-else class="loading">
 							<div class="spinner"></div>
 						</div>
@@ -57,6 +58,7 @@
 	</v-row>
 </template>
 <script setup>
+    import '@/assets/colours.css'
     import RandomCountry from './RandomCountry.vue';
     import MediaButton from "./MediaControl.vue";
 	import { ref, onMounted } from "vue";
@@ -127,4 +129,7 @@
 
 <style scoped>
 @import "./assets/styles.css";
+.v-btn {
+    background-color: var(--buttonColor);
+}
 </style>

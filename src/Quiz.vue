@@ -4,8 +4,8 @@
 		<video :src="correctAnswer[1]" @timeupdate="updateTime"></video>
         <v-col cols="12">
             <MediaButton class="px-14" />
-            <v-btn @click="newQuiz"   class="mx-auto my-2 bg-blue-grey-darken-4" id="refresh">
-			    <v-icon>mdi-refresh</v-icon>
+            <v-btn @click="newQuiz" class="ml-2 my-2" id="refresh">
+			    <v-icon class->mdi-refresh</v-icon>
 		    </v-btn>
         </v-col>
 		
@@ -23,7 +23,7 @@
 					<v-btn
 						block
 						:color="getButtonColor(country)"
-						class="rounded-lg px-12 text-truncate"
+						class="rounded-lg px-12  mt-2 w-75 text-truncate"
 						:disabled="answered"
 						@click="submitQuizAnswer(country)">
 						{{ country }}
@@ -51,6 +51,7 @@
 </template>
 
 <script setup>
+	import '@/assets/colours.css'
 	import { ref, onMounted } from "vue";
 	import MediaButton from "./MediaControl.vue";
 
@@ -86,7 +87,7 @@
 	}
 
 	function getButtonColor(country) {
-		if (!answered.value) return "blue-grey-darken-4";
+		if (!answered.value) return null;
 
 		if (country === correctAnswer.value[0]) return "success"; // highlight correct
 		if (country === submittedAnswer.value) return "error"; // highlight wrong guess
@@ -121,5 +122,10 @@
 
 	#refresh {
 		color: white;
+	}
+
+	.v-btn {
+    background-color: var(--buttonColor);
+    color: var(--buttonTextColor);
 	}
 </style>

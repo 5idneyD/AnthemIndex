@@ -19,7 +19,7 @@
 		</v-col>
 		<!-- Right column: Lyrics + Suggestion -->
 		<v-col cols="12" md="6" class="d-flex flex-column gap-6">
-			<div class="neo-card h-50 px-8 py-6 flex flex-col flex-1 overflow-auto">
+			<div class="neo-card h-25 px-8 pt-6 flex flex-col flex-1 overflow-auto">
 				<div>
 					<h2 class="font-bold mb-4">Explore Our Rich Collection of Songs</h2>
 					<p>Learn the lyrics and listen to the tunes of national anthems from all over the world!</p>
@@ -35,9 +35,14 @@
 </template>
 <script setup>
     import RandomCountry from './RandomCountry.vue';
+    import '@/assets/colours.css'
 	import Quiz from "./Quiz.vue";
 </script>
 
 <style scoped>
 @import "./assets/styles.css";
+.v-btn {
+    background-color: var(--buttonColor);
+    color: var(--buttonTextColor);
+}
 </style>
