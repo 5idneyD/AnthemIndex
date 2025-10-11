@@ -32,8 +32,8 @@
 			</v-row>
 		</v-col>
 	</v-row>
-	<v-row>
-		<!-- Feedback -->
+	<!-- <v-row> 
+		Feedback
 		<v-col cols="12">
 			<v-alert
 				v-if="answered"
@@ -47,7 +47,7 @@
 				}}
 			</v-alert>
 		</v-col>
-	</v-row>
+	</v-row> -->
 </template>
 
 <script setup>

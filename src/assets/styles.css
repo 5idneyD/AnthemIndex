@@ -1,0 +1,59 @@
+.bg-neutral {
+		background-color: #031628;
+	}
+	.border-thick {
+		border: 3px solid black !important;
+	}
+	#header, #footer {
+		background-color: #f3f4f6;
+	}
+	#header a, #footer a {
+		color: #031628;
+		font-weight: bold;
+		text-decoration: none;
+	}
+	.neo-card {
+		/* /background: #ffffff; */
+		background-color: #f3f4f6;
+		color: #031628;
+		/* border: 3px solid black; */
+		/* box-shadow: 6px 6px 0px #000; */
+		border-radius: 20px;
+		min-height: 50vh;
+		max-height: 90vh;
+		overflow-y: hidden;
+	}
+
+	.neo-card a{
+		color: #031628;
+		text-decoration: none;
+	}
+	.neo-input .v-field__input {
+		border: 3px solid black;
+		box-shadow: 4px 4px 0px #000;
+		background-color: #fff !important;
+	}
+	.neo-divider {
+		border: 2px solid black;
+		margin: 1rem auto;
+		width: 60%;
+	}
+	.spinner {
+		border: 6px solid rgba(0, 0, 0, 0.1);
+		border-top: 6px solid #000;
+		border-radius: 50%;
+		width: 48px;
+		height: 48px;
+		animation: spin 1s linear infinite;
+	}
+
+	a {
+		white-space: nowrap;
+		overflow: visible;
+	}
+
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
