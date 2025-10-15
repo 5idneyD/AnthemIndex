@@ -15,14 +15,13 @@
 							height="70px" />
 						<div v-else></div>
 					</v-col>
-					<v-col cols="5" sm="4" class="text-center">
+					<v-col cols="5" sm="6" class="text-center align-center">
 						<video :src="selectedSource" @timeupdate="updateTime" class="d-none"></video>
 						<span v-if="selectedSource">
-							<MediaButton class="w-25 ml-25 mt-4 px-14" />
+							<MediaButton class="mt-4 px-10" />
 							<v-switch
 								inset
-								color="dark"
-								class="ml-6 text-caption"
+                                class="ml-9 mt-3"
 								@change="switchAnthemType"
 								:disabled="!vocalSourceURL || !sourceURL">
 							</v-switch>

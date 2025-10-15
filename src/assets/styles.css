@@ -1,23 +1,26 @@
+@import "./colours.css";
+
 .bg-neutral {
-    background-color: #031628;
+    background-color: var(--bodyBackgroundColor);;
 }
 .border-thick {
     border: 3px solid black !important;
 }
 #header,
 #footer {
-    background-color: #f3f4f6;
+    background-color: var(--card-color);
 }
 #header a,
 #footer a {
-    color: #031628;
+    color: var(--bodyBackgroundColor);
     font-weight: bold;
     text-decoration: none;
 }
 .neo-card {
     /* /background: #ffffff; */
-    background-color: #f3f4f6;
-    color: #031628;
+    /* background-color: #f3f4f6; */
+    background-color: var(--card-color);
+    color: var(--bodyBackgroundColor);
     /* border: 3px solid black; */
     /* box-shadow: 6px 6px 0px #000; */
     border-radius: 20px;
@@ -29,7 +32,7 @@
 }
 
 .neo-card a {
-    color: #031628;
+    color: var(--bodyBackgroundColor);
     text-decoration: none;
 }
 .neo-input .v-field__input {

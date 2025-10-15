@@ -40,8 +40,10 @@
 	</v-app>
 </template>
 <script setup>
+	import '@/assets/colours.css'
 	import Home from "./Home.vue";
 	import Country from "./Country.vue";
+
 	import { ref, onMounted } from "vue";
 
 	const Window = ref(window);
@@ -68,4 +70,5 @@
 </script>
 <style scoped>
 	@import "./assets/styles.css";
+	
 </style>

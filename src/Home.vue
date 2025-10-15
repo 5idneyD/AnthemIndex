@@ -9,7 +9,7 @@
 						src="https://cdn.pixabay.com/photo/2016/02/04/13/40/the-earth-1179205_1280.png"
 						alt="Earth Globe"
 						max-width="180"
-						class="mx-auto my-14" />
+						class="mx-auto mt-14 mb-6" />
 					<v-card-title>Play our Quiz:</v-card-title>
 					<v-card-text class="text-grey py-8 px-16">
 						<Quiz />
@@ -19,7 +19,7 @@
 		</v-col>
 		<!-- Right column: Lyrics + Suggestion -->
 		<v-col cols="12" md="6" class="d-flex flex-column gap-6">
-			<div class="neo-card h-25 px-8 pt-6 flex flex-col flex-1 overflow-auto">
+			<div class="neo-card h-25 px-8 py-6 flex flex-col flex-1 overflow-auto">
 				<div>
 					<h2 class="font-bold mb-4">Explore Our Rich Collection of Songs</h2>
 					<p>Learn the lyrics and listen to the tunes of national anthems from all over the world!</p>

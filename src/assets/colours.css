@@ -1,5 +1,6 @@
 :root {
-  --buttonColor: #121c49;
+  --bodyBackgroundColor: #031628;
+  --card-color: #d5d2cc;
   --buttonTextColor: white;
-  --card-color: #f3f4f6;
+  --buttonColor: #121c49;
 }
