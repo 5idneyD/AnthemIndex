@@ -59,7 +59,7 @@
 	onMounted(async () => {
 		const res = await fetch("/api/countries");
 		const data = await res.json();
-		countries.value = data.map((row) => row[0]);
+		countries.value = data.map((row) => row[0]).sort().slice(1,-1);;
 		const pathCountry = window.location.pathname.split("/")[1];
 		if (pathCountry && countries.value.includes(pathCountry)) {
 			selectedCountry.value = pathCountry;

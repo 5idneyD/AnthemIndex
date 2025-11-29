@@ -6,7 +6,7 @@
 				<v-row justify="center" class="py-6">
 					<v-col cols="7" sm="6" class="text-center">
 						<v-card-title class="">{{ message }}</v-card-title>
-                        <img
+						<img
 							v-if="flagLink"
 							:src="flagLink"
 							alt="flag"
@@ -17,17 +17,22 @@
 					</v-col>
 					<v-col cols="5" sm="6" class="text-center align-center">
 						<video :src="selectedSource" @timeupdate="updateTime" class="d-none"></video>
+
 						<span v-if="selectedSource">
 							<MediaButton class="mt-4 px-10" />
-							<v-switch
-								inset
-                                class="ml-9 mt-3"
-								@change="switchAnthemType"
-								:disabled="!vocalSourceURL || !sourceURL">
-							</v-switch>
-                            <p v-text="vocalSourceURL && sourceURL ? selectedAnthemType : ''"
-                            </p>
+
+							<!-- Centered switch -->
+							<div class="d-flex justify-center mt-3">
+								<v-switch
+									id="anthem-type-switch"
+									inset
+									@change="switchAnthemType"
+									:disabled="!vocalSourceURL || !sourceURL" />
+							</div>
+
+							<p v-text="vocalSourceURL && sourceURL ? selectedAnthemType : ''"></p>
 						</span>
+
 						<div v-else class="loading">
 							<div class="spinner"></div>
 						</div>
@@ -57,12 +62,12 @@
 	</v-row>
 </template>
 <script setup>
-    import '@/assets/colours.css'
-    import RandomCountry from './RandomCountry.vue';
-    import MediaButton from "./MediaControl.vue";
+	import "@/assets/colours.css";
+	import RandomCountry from "./RandomCountry.vue";
+	import MediaButton from "./MediaControl.vue";
 	import { ref, onMounted } from "vue";
 
-    const message = ref("");
+	const message = ref("");
 	const sourceURL = ref("");
 	const vocalSourceURL = ref("");
 	const selectedAnthemType = ref("Vocal"); // not true/false
@@ -74,8 +79,6 @@
 	const year = ref("");
 	const short_fact = ref("");
 	const title = ref("");
-
-
 
 	const fetchedData = ref(false);
 
@@ -96,7 +99,7 @@
 			flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : null;
 			lyrics.value = data.lyrics.replace(
 				/\n\n\n/g,
-				'\n\n<hr style="border: 1px solid white; margin: 1rem auto; width: 60%;">\n',
+				'\n\n<hr style="border: 1px solid #031628; margin: 1rem auto; width: 60%;">\n',
 			);
 			lyricist.value = data.lyricist;
 			composer.value = data.composer;
@@ -122,13 +125,12 @@
 			selectedSource.value = vocalSourceURL.value;
 			selectedAnthemType.value = "Vocal";
 		}
-
 	}
 </script>
 
 <style scoped>
-@import "./assets/styles.css";
-.v-btn {
-    background-color: var(--buttonColor);
-}
+	@import "./assets/styles.css";
+	.v-btn {
+		background-color: var(--buttonColor);
+	}
 </style>
