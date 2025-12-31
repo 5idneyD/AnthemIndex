@@ -27,4 +27,8 @@
 .v-btn {
 	background-color: var(--buttonColour);
 }
+
+i.mdi {
+color: var(--buttonColour) !important;
+}
 </style>

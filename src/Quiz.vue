@@ -5,7 +5,7 @@
         <v-col cols="12">
             <MediaButton class="px-14" />
             <v-btn @click="newQuiz" class="ml-2 my-2" id="refresh">
-			    <v-icon class->mdi-refresh</v-icon>
+			    <v-icon color="#000602">mdi-refresh</v-icon>
 		    </v-btn>
         </v-col>
 		

@@ -12,6 +12,7 @@
 				<v-autocomplete
 					v-model="selectedCountry"
 					:items="countries"
+					color="#aff8c4"
 					item-title="name"
 					item-value="name"
 					label="Select a country"
@@ -31,7 +32,7 @@
 		<!-- Footer -->
 		<v-footer class="border-thick" id="footer">
 			<v-container class="text-center">
-				<p>
+				<p style="color: #aff8c4;">
 					Sponsored by
 					<a href="https://www.novariance.com" class="underline">No Variance.com</a>
 				</p>

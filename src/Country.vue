@@ -99,7 +99,7 @@
 			flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : null;
 			lyrics.value = data.lyrics.replace(
 				/\n\n\n/g,
-				'\n\n<hr style="border: 1px solid #031628; margin: 1rem auto; width: 60%;">\n',
+				'\n\n<hr style="border: 1px solid #aff8c4; margin: 1rem auto; width: 60%;">\n',
 			);
 			lyricist.value = data.lyricist;
 			composer.value = data.composer;

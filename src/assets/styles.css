@@ -4,7 +4,7 @@
     background-color: var(--bodyBackgroundColor);;
 }
 .border-thick {
-    border: 3px solid black !important;
+    border: 3px solid var(--card-color) !important;
 }
 #header,
 #footer {
@@ -35,13 +35,9 @@
     color: var(--bodyBackgroundColor);
     text-decoration: none;
 }
-.neo-input .v-field__input {
-    border: 3px solid black;
-    box-shadow: 4px 4px 0px #000;
-    background-color: #fff !important;
-}
+
 .neo-divider {
-    border: 2px solid black;
+    border: 2px solid var(--bodyBackgroundColor);
     margin: 1rem auto;
     width: 60%;
 }
@@ -63,4 +59,30 @@ a {
     to {
         transform: rotate(360deg);
     }
+}
+
+mdi-menu-down mdi v-icon notranslate v-theme--greenTheme v-icon--size-default v-icon--clickable v-autocomplete__menu-icon
+ {
+    opacity: 1 !important;
+    color: #aff8c4 !important;
+}
+
+.v-label.v-field-label.v-field-label--floating,
+.v-field__outline {
+    color: #aff8c4 !important;
+    opacity: 1 !important;
+}
+
+.neo-input .v-field {
+  --v-field-border-color: #aff8c4 !important;
+  --v-field-border-opacity: 1 !important;
+}
+
+.neo-input .v-field-label {
+  color: #aff8c4 !important;
+}
+
+.v-app-bar.v-toolbar {
+    color: #aff8c4 !important;
+    opacity: 1 !important;
 }

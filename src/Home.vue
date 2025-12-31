@@ -45,4 +45,9 @@
     background-color: var(--buttonColor);
     color: var(--buttonTextColor);
 }
+
+
+i.mdi {
+color: var(--buttonColour) !important;
+}
 </style>
