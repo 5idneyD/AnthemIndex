@@ -6,7 +6,7 @@ import sqlite3
 from datetime import datetime
 
 
-ROOT = os.path.dirname(os.path.realpath(__file__))
+ROOT = os.path.dirname(os.path.realpath(__file__)) if "__file__" in globals() else os.getcwd()
 app = Flask(__name__, static_folder="dist", static_url_path="")
 # CORS(app)
 # Make sure .js files are served as application/javascript
