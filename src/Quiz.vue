@@ -2,30 +2,25 @@
 	<v-row>
 		<!-- Media player -->
 		<video :src="correctAnswer[1]" @timeupdate="updateTime"></video>
-        <v-col cols="12">
-            <MediaButton class="px-14" />
-            <v-btn @click="newQuiz" class="ml-2 my-2" id="refresh">
-			    <v-icon color="#000602">mdi-refresh</v-icon>
-		    </v-btn>
-        </v-col>
-		
+		<v-col cols="12">
+			<MediaButton class="px-14" />
+			<v-btn @click="newQuiz" class="ml-2 my-2" id="refresh">
+				<v-icon color="#000602">mdi-refresh</v-icon>
+			</v-btn>
+		</v-col>
 	</v-row>
 	<v-row>
 		<!-- Quiz buttons -->
 		<v-col cols="12">
 			<v-row dense justify="space-between">
-				<v-col
-					v-for="(country, index) in quizCountries"
-					:key="index"
-					cols="12"
-					md=""
-					class="d-flex justify-center">
+				<v-col v-for="(country, index) in quizCountries" :key="index" cols="12">
 					<v-btn
 						block
 						:color="getButtonColor(country)"
-						class="rounded-lg px-12  mt-2 w-75 text-truncate"
+						class="rounded-lg mt-3 quizAnswer w-100"
 						:disabled="answered"
-						@click="submitQuizAnswer(country)">
+						@click="submitQuizAnswer(country)"
+						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
 						{{ country }}
 					</v-btn>
 				</v-col>
@@ -51,7 +46,7 @@
 </template>
 
 <script setup>
-	import '@/assets/colours.css'
+	import "@/assets/colours.css";
 	import { ref, onMounted } from "vue";
 	import MediaButton from "./MediaControl.vue";
 
@@ -125,7 +120,16 @@
 	}
 
 	.v-btn {
-    background-color: var(--buttonColor);
-    color: var(--buttonTextColor);
+		background-color: var(--buttonColor);
+		color: var(--buttonTextColor);
 	}
+
+	.v-btn.quizAnswer :deep(.v-btn__content) {
+	font-size: smaller;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+
+}
 </style>

@@ -2,20 +2,20 @@
 	<v-app class="bg-neutral">
 		<!-- Header -->
 		<v-app-bar flat class="px-6 py-4 border-thick" id="header">
-			<v-col cols="8" lg="7">
+			<v-col cols="7">
 				<v-card-title>
-					<a href="/" class="text-center">Anthem Index 🌍</a>
+					<a href="/" style="font-size: smaller;">Anthem Index 🌍</a>
 				</v-card-title>
 			</v-col>
 			<v-col cols="0" lg="1" class="hidden-md-and-down"></v-col>
-			<v-col cols="4" lg="4">
+			<v-col cols="5">
 				<v-autocomplete
 					v-model="selectedCountry"
 					:items="countries"
 					color="#aff8c4"
 					item-title="name"
 					item-value="name"
-					label="Select a country"
+					label="Select Country"
 					hide-details
 					variant="outlined"
 					class="neo-input"
@@ -23,7 +23,7 @@
 			</v-col>
 		</v-app-bar>
 		<!-- Main Content -->
-		<v-main class="px-6 py-10">
+		<v-main class="px-6">
 			<v-container fluid>
 				<Home v-if="Window.location.href.endsWith('/') || Window.location.href.endsWith('/null')" />
 				<Country v-else />
