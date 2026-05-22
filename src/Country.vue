@@ -96,7 +96,7 @@
 				data.vocal_media && data.vocal_media !== ""
 					? window.location.origin + "/" + data.vocal_media
 					: data.source;
-			flagLink.value = data.flag_link ? data.flag_link.replace("40px", "130px") : null;
+			flagLink.value = data.flag_link ? data.flag_link.replace("40px", "120px") : null;
 			lyrics.value = data.lyrics.replace(
 				/\n\n\n/g,
 				'\n\n<hr style="border: 1px solid #aff8c4; margin: 1rem auto; width: 60%;">\n',
