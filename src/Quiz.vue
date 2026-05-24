@@ -17,7 +17,7 @@
 					<v-btn
 						block
 						:color="getButtonColor(country)"
-						class="rounded-lg mt-3 quizAnswer w-100"
+						class="rounded-lg mt-3 quizAnswer w-100 px-0"
 						:disabled="answered"
 						@click="submitQuizAnswer(country)"
 						style="text-overflow: ellipsis; overflow: hidden; white-space: nowrap">
