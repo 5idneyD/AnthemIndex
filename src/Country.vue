@@ -53,7 +53,7 @@
 		</v-col>
 		<!-- Right column: Lyrics + Suggestion -->
 		<v-col cols="12" md="6" class="d-flex flex-column gap-6">
-			<div class="neo-card h-50 px-8 py-6 flex flex-col flex-1 overflow-auto">
+			<div class="neo-card h-50 px-8 mt-14 py-6 flex flex-col overflow-auto">
 				<div v-if="lyrics" id="lyrics" class="text-pre-wrap text-center pt-8" v-html="lyrics"></div>
 				<div v-else class="loading min-h-[200px]"><div class="spinner"></div></div>
 			</div>
